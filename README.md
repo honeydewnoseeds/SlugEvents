@@ -1,3 +1,3 @@
 # SlugEvents
 # HELlO WORLD
-# Hello world again
+# Hello world again!
