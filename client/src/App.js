@@ -3,16 +3,30 @@ import logo from './logo.svg';
 import './App.css';
 import { db } from './config/firebase';
 import { getDocs, collection } from "firebase/firestore";
+import { addDoc } from "firebase/firestore";
 
 function App() {
   const [eventList, setEventList] = useState([]);
+  const eventsCollectionRef = collection(db, "events");
+  const addEvent = async (event) => {
+    try {
+      const docRef = await addDoc(eventsCollectionRef, event);
+      console.log("Event added with ID:", docRef.id);
+    } catch (err) {
+      console.error("Error adding event:", err);
+    }
+  };
 
-  const moviesCollectionRef = collection(db, "events");
+  addEvent({ name: "Sample Event", date: "2023-05-01" });
   useEffect(() => {
     const getEventList = async() => {
       try {
-        const data = await getDocs(moviesCollectionRef);
-        console.log(data);
+        const data = await getDocs(eventsCollectionRef);
+        const filteredData = data.docs.map((doc) => ({
+          ...doc.data(), 
+          id: doc.id,
+        }));
+        console.log(filteredData);
       } catch (err) {
         console.error(err);
       }
