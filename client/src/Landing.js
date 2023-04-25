@@ -14,51 +14,40 @@ export default function Landing() {
     <Box
       height="100vh"
       width="100vw"
+      flexGrow={1}
       sx={{
+        position: "absolute",
         display: "flex",
-        flexGrow: 1,
+        flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
         backgroundColor: "background.default",
-        // padding: "10%",
       }}
     >
       <Stack
         spacing={2}
         direction="column"
         alignItems="center"
-        paddingLeft={"40vh"}
-        paddingRight={"40vh"}
+        padding={2}
+        // paddingLeft={"40vh"}
+        // paddingRight={"40vh"}
       >
         <Typography variant="h1" color="text.secondary">
           SlugEvents
         </Typography>
-        <Card sx={{ backgroundColor: "background.paper" }}>
-          <CardHeader title="EventTitle" />
-          <CardContent>
-            <Typography variant="body1">
-              This is a website for UCSC students to find events on campus.
-            </Typography>
-          </CardContent>
-        </Card>
-        <Card sx={{ backgroundColor: "background.paper" }}>
-          <CardHeader title="EventTitle2" />
-          <CardContent>
-            <Typography variant="body1">
-              This is a website for UCSC students to find events on campus.
-            </Typography>
-          </CardContent>
-        </Card>
-        <Card sx={{ backgroundColor: "background.paper" }}>
-          <CardHeader title="EventTitle3" />
-          <CardContent>
-            <Typography variant="body1">
-              This is a website for UCSC students to find events on campus.
-            </Typography>
-          </CardContent>
-        </Card>
+        <Stack direction="column" spacing={2}>
+          <Event
+            title="EventTitle4"
+            description="This is a website for UCSC students to find events on campus."
+            imageSrc="https://source.unsplash.com/random"
+          />
+          <Event
+            title="EventTitle4"
+            description="This is a website for UCSC students to find events on campus."
+            imageSrc="https://source.unsplash.com/random"
+          />
+        </Stack>
       </Stack>
-      <Stack spacing={2} direction="column" alignItems="center"></Stack>
     </Box>
   );
 }

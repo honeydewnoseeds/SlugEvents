@@ -1,31 +1,30 @@
 import React from "react";
-import { Card, CardMedia, CardContent, Typography } from "@mui/material";
-import { makeStyles } from "@mui/styles";
+import {
+  Card,
+  // CardMedia,
+  CardContent,
+  Avatar,
+  Stack,
+  Typography,
+} from "@mui/material";
 
-const useStyles = makeStyles((theme) => ({
-  card: {
-    display: "flex",
-    marginBottom: theme.spacing(2),
-  },
-  media: {
-    width: 300,
-  },
-  content: {
-    flex: 1,
-  },
-}));
-
-export default function Event(props) {
-  const classes = useStyles();
-  const { title, description, imageSrc } = props;
-
+// Props.title = Event Title
+// Props.description = event description
+// Props.imageSrc = flyer from event
+const Event = (props) => {
   return (
-    <Card className={classes.card}>
-      <CardMedia className={classes.media} image={imageSrc} />
-      <CardContent className={classes.content}>
-        <Typography variant="h5">{title}</Typography>
-        <Typography variant="body1">{description}</Typography>
+    <Card sx={{ width: "100%", backgroundColor: "background.paper" }}>
+      <CardContent>
+        <Stack direction="row" spacing={2}>
+          <Avatar alt={props.title} src={props.imageSrc} />
+          <Typography variant="subtitle">{props.title}</Typography>
+        </Stack>
+        <Typography component="div" marginTop={2}>
+          {props.description}
+        </Typography>
       </CardContent>
     </Card>
   );
-}
+};
+
+export default Event;
