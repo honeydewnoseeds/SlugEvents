@@ -6,20 +6,30 @@ import {
   Card,
   CardContent,
   CardHeader,
+  useThemeProps,
 } from "@mui/material";
 import Event from "./Components/EventCard";
 
 export default function Landing() {
   return (
+    <div
+    style={{
+      display: "flex",
+      alignItems: "center",
+      textAlign: "center",
+      height: "100%"
+    }}
+  >
     <Box
-      height="100vh"
-      width="100vw"
+      height="auto"
+      width="auto"
+      //auto fit constraints
       flexGrow={1}
       sx={{
-        position: "absolute",
+        position: "relative",
         display: "flex",
         flexDirection: "column",
-        justifyContent: "center",
+        //justifyContent: "center",
         alignItems: "center",
         backgroundColor: "background.default",
       }}
@@ -27,27 +37,47 @@ export default function Landing() {
       <Stack
         spacing={2}
         direction="column"
-        alignItems="center"
+        alignItems = "center"
+        textAlign = "center"
         padding={2}
-        // paddingLeft={"40vh"}
-        // paddingRight={"40vh"}
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center"
+        }}
       >
-        <Typography variant="h1" color="text.secondary">
+        <Typography variant="h2" color="text.secondary" >
           SlugEvents
         </Typography>
-        <Stack direction="column" spacing={2}>
-          <Event
-            title="EventTitle4"
+        <Stack direction="column" alignItems = "center" textAlign = "center" spacing={2}>
+          <Event alignItems = "center"
+            title="EventTitle3"
             description="This is a website for UCSC students to find events on campus."
             imageSrc="https://source.unsplash.com/random"
           />
           <Event
             title="EventTitle4"
+            description="This is a website for UCSC students to find evesfiohaifhasifbasuvfuavfuyasvudavsuavsudvasyunts on campus."
+            imageSrc="https://source.unsplash.com/random"
+          />
+          <Event
+            title="EventTitle5"
+            description="This is a website for UCSC students to find events on campus."
+            imageSrc="https://source.unsplash.com/random"
+          />
+          <Event
+            title="EventTitle6"
+            description="This is a website for UCSC students to find events on campus."
+            imageSrc="https://source.unsplash.com/random"
+          />
+          <Event
+            title="EventTitle6"
             description="This is a website for UCSC students to find events on campus."
             imageSrc="https://source.unsplash.com/random"
           />
         </Stack>
       </Stack>
     </Box>
+    </div>
   );
 }

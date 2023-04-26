@@ -13,13 +13,13 @@ import {
 // Props.imageSrc = flyer from event
 const Event = (props) => {
   return (
-    <Card sx={{ width: "100%", backgroundColor: "background.paper" }}>
+    <Card sx={{width: window.innerWidth * .90, backgroundColor: "background.paper"}}>
       <CardContent>
-        <Stack direction="row" spacing={2}>
-          <Avatar alt={props.title} src={props.imageSrc} />
-          <Typography variant="subtitle">{props.title}</Typography>
+        <Stack direction="row" spacing={2} textAlign = "center">
+          <Avatar alt={props.title} src={props.imageSrc}/>
+          <Typography variant="div" sx = {{textAlign: "center"}}> {props.title} </Typography>
         </Stack>
-        <Typography component="div" marginTop={2}>
+        <Typography component="div" textAlign = "center" marginTop={2}>
           {props.description}
         </Typography>
       </CardContent>
