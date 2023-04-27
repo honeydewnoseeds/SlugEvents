@@ -9,26 +9,25 @@ import "./App.css";
 import { ThemeProvider } from "@mui/material";
 import { themeOptions } from "./Components/theme";
 import { deleteDoc, doc, writeBatch } from "firebase/firestore";
-
+import { onSnapshot } from "firebase/firestore";
 
 function App() {
   const [eventList, setEventList] = useState([]);
   const eventsCollectionRef = collection(db, "events");
 
   useEffect(() => {
-    const getEventList = async () => {
-      try {
-        const data = await getDocs(eventsCollectionRef);
-        const filteredData = data.docs.map((doc) => ({
-          ...doc.data(),
-          id: doc.id,
-        }));
-        setEventList(filteredData); // Update the eventList state
-      } catch (err) {
-        console.error(err);
-      }
+    const unsubscribe = onSnapshot(eventsCollectionRef, (snapshot) => {
+      const updatedData = snapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+      setEventList(updatedData);
+    });
+  
+    // Clean up the listener when the component unmounts
+    return () => {
+      unsubscribe();
     };
-    getEventList();
   }, []);
 
 //Add an event using the format addEvent({account: "Porter/Kresge", description: "Lorem ipsum", imageSrc: "https://source.unsplash.com/random"})
