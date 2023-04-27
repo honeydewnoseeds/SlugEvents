@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import Event from "./Components/EventCard";
 
-export default function Landing() {
+export default function Landing({ eventList }) {
   return (
     <div
     style={{
@@ -22,6 +22,7 @@ export default function Landing() {
   >
     <Box
       height="auto"
+      minHeight="100vh"
       width="auto"
       //auto fit constraints
       flexGrow={1}
@@ -49,33 +50,16 @@ export default function Landing() {
         <Typography variant="h2" color="text.secondary" >
           SlugEvents
         </Typography>
-        <Stack direction="column" alignItems = "center" textAlign = "center" spacing={2}>
-          <Event alignItems = "center"
-            title="EventTitle3"
-            description="This is a website for UCSC students to find events on campus."
-            imageSrc="https://source.unsplash.com/random"
-          />
-          <Event
-            title="EventTitle4"
-            description="This is a website for UCSC students to find evesfiohaifhasifbasuvfuavfuyasvudavsuavsudvasyunts on campus."
-            imageSrc="https://source.unsplash.com/random"
-          />
-          <Event
-            title="EventTitle5"
-            description="This is a website for UCSC students to find events on campus."
-            imageSrc="https://source.unsplash.com/random"
-          />
-          <Event
-            title="EventTitle6"
-            description="This is a website for UCSC students to find events on campus."
-            imageSrc="https://source.unsplash.com/random"
-          />
-          <Event
-            title="EventTitle6"
-            description="This is a website for UCSC students to find events on campus."
-            imageSrc="https://source.unsplash.com/random"
-          />
-        </Stack>
+        <Stack direction="column" alignItems="center" textAlign="center" spacing={2}>
+      {eventList.map((event) => (
+        <Event
+          key={event.id}
+          title={event.account}
+          description={event.description}
+          imageSrc={event.imageSrc || "https://source.unsplash.com/random"}
+        />
+      ))}
+    </Stack>
       </Stack>
     </Box>
     </div>
