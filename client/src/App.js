@@ -13,6 +13,7 @@ import { onSnapshot } from "firebase/firestore";
 
 function App() {
   const [eventList, setEventList] = useState([]);
+  const [filteredEventList, setFilteredEventList] = useState(null);
   const eventsCollectionRef = collection(db, "events");
 
   useEffect(() => {
@@ -27,6 +28,34 @@ function App() {
     // Clean up the listener when the component unmounts
     return () => {
       unsubscribe();
+    };
+  }, []);
+
+  // Define a function to filter events by the "account" field
+  const filterByAccount = (accountToFilter) => {
+    const filteredEvents = eventList.filter((event) => event.account === accountToFilter);
+    setFilteredEventList(filteredEvents);
+  };
+
+  // Attach the filterByAccount function to the window object
+  useEffect(() => {
+    window.filterByAccount = filterByAccount;
+    return () => {
+      // Clean up the function from the window object when the component is unmounted
+      delete window.filterByAccount;
+    };
+  }, [eventList]);
+
+  const resetFilter = () => {
+    setFilteredEventList(null);
+  };
+
+  // Attach the resetFilter function to the window object
+  useEffect(() => {
+    window.resetFilter = resetFilter;
+    return () => {
+      // Clean up the function from the window object when the component is unmounted
+      delete window.resetFilter;
     };
   }, []);
 
@@ -63,7 +92,7 @@ const addEvent = async (event = {
 
   return (
     <ThemeProvider theme={themeOptions}>
-      <Landing eventList={eventList} />
+      <Landing eventList={filteredEventList || eventList} />
     </ThemeProvider>
   );
 }
