@@ -10,10 +10,19 @@ import React from 'react';
 
 
 function App() {
-  return (  
+  return (
+    <div>
+    <div className = "App">
+    <div className = "btns">
+      <button value = "All">All</button>
+      <button value = "College 9/10">College 9/10</button>
+      <button value = "Cowell Stevenson">Cowell Stevenson</button>
+    </div>
+  </div>
   <ThemeProvider theme={themeOptions}>
     <Landing />
   </ThemeProvider>
+  </div>
   );
 }
 

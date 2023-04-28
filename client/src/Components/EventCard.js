@@ -13,7 +13,7 @@ import {
 // Props.imageSrc = flyer from event
 const Event = (props) => {
   return (
-    <Card sx={{width: window.innerWidth * .90, backgroundColor: "background.paper"}}>
+    <Card sx={{width: "90vw", backgroundColor: "background.paper"}}>
       <CardContent>
         <Stack direction="row" spacing={2} textAlign = "center">
           <Avatar alt={props.title} src={props.imageSrc}/>
