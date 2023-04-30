@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import Event from "./Components/EventCard";
 import Filters from "./Components/filters";
+import CreateEvent from "./Components/CreateEvent";
 
 export default function Landing() {
   const [filterValue, setFilterValue] = useState("All");
@@ -138,6 +139,7 @@ export default function Landing() {
               />
             ))}
           </Stack>
+          <CreateEvent></CreateEvent>
         </Stack>
       </Box>
     </div>
