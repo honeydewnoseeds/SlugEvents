@@ -46,6 +46,16 @@
 }
 
 .btns button{
-  width: 130px;
+  width: 120px;
+  height: 40px;
   margin: 5px;
+  border-radius: 90%;
+
 }
+
+.btn1 {background-color: #B0D0D3;}
+.btn2 {background-color: #C08497;}
+.btn3 {background-color: #F7AF9D;}
+.btn4 {background-color: #1bd7a8;}
+.btn5 {background-color: #cc2a2a;}
+.btn6 {background-color: #e766b5;}
