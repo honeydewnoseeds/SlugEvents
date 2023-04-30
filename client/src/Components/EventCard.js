@@ -6,6 +6,13 @@ import { Card, CardContent, Stack, Typography } from "@mui/material";
 // Props.imageSrc = flyer from event
 const Event = (props) => {
   return (
+<<<<<<< HEAD
+    <Card sx={{width: "90vw", backgroundColor: "background.paper"}}>
+      <CardContent>
+        <Stack direction="row" spacing={2} textAlign = "center">
+          <Avatar alt={props.title} src={props.imageSrc}/>
+          <Typography variant="div" sx = {{textAlign: "center"}}> {props.title} </Typography>
+=======
     <Stack spacing={2} direction="column" alignItems="center">
       <Card
         sx={{
@@ -42,6 +49,7 @@ const Event = (props) => {
               {props.description}
             </Typography>
           </CardContent>
+>>>>>>> bf56ff016080d5f04de5bf91425834a0d2aefef7
         </Stack>
       </Card>
     </Stack>
