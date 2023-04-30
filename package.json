@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "instagram-private-api": "^1.45.3",
+    "instagram-scraper": "^1.0.6",
+    "instagram-web-api": "^2.2.2",
+    "scraper-instagram": "^1.0.17"
+  }
+}
