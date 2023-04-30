@@ -3,11 +3,10 @@ import {
   Box,
   Typography,
   Stack,
-  Grid,
-  Card,
-  CardContent,
-  CardHeader,
-  useThemeProps,
+  // Card,
+  // CardContent,
+  // CardHeader,
+  // useThemeProps,
 } from "@mui/material";
 import Event from "./Components/EventCard";
 import Filters from "./Components/filters";
@@ -109,7 +108,6 @@ export default function Landing() {
           backgroundColor: "background.default",
         }}
       >
-        <Grid></Grid>
         <Stack
           spacing={2}
           direction="column"
