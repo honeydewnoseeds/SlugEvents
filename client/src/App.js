@@ -38,6 +38,7 @@ function App() {
     setFilteredEventList(filteredEvents);
   };
 
+  /*
   // Attach the filterByAccount function to the window object
   useEffect(() => {
     window.filterByAccount = filterByAccount;
@@ -46,7 +47,7 @@ function App() {
       delete window.filterByAccount;
     };
   }, [eventList]);
-
+  */
   const resetFilter = () => {
     setFilteredEventList(null);
   };
