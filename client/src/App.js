@@ -5,6 +5,7 @@ import { db } from './config/firebase';
 import { getDocs, collection } from "firebase/firestore";
 import { addDoc } from "firebase/firestore";
 import Landing from "./Landing";
+import Info from "./info";
 import "./App.css";
 import { ThemeProvider } from "@mui/material";
 import { themeOptions } from "./Components/theme";
