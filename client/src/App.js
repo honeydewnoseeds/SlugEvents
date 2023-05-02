@@ -33,10 +33,12 @@ function App() {
   }, []);
 
   // Define a function to filter events by the "account" field
-  const filterByAccount = (accountToFilter) => {
-    const filteredEvents = eventList.filter((event) => event.account === accountToFilter);
+  const filterByAccount = (accountToFilter1, accountToFilter2) => {
+    const filteredEvents = eventList.filter(
+      (event) => event.account === accountToFilter1 || event.account === accountToFilter2
+    );
     setFilteredEventList(filteredEvents);
-  };
+  };  
 
   /*
   // Attach the filterByAccount function to the window object
@@ -51,6 +53,26 @@ function App() {
   const resetFilter = () => {
     setFilteredEventList(null);
   };
+
+  const filterC9C10 = () => {
+    filterByAccount("ucsc9_jrl", )
+  }
+
+  const filterPorterKresge = () => {
+    filterByAccount("porter.college", "kc_ucsc");
+  }
+
+  const filterCowellStevenson = () => {
+    filterByAccount("stevenson.ucsc", "cowell.ucsc");
+  }
+
+  const filterRccOakes = () => {
+    filterByAccount("rcc_ucsc", "oakescollege");
+  }
+
+  const filterCrownMerill = () => {
+    filterByAccount("ucsccrowncollege", "ucscmerillcollege");
+  }
 
   // Attach the resetFilter function to the window object
   useEffect(() => {
@@ -94,7 +116,16 @@ const addEvent = async (event = {
 
   return (
     <ThemeProvider theme={themeOptions}>
-      <Landing eventList={filteredEventList || eventList} />
+      <Landing
+  eventList={filteredEventList || eventList}
+  resetFilter={resetFilter}
+  filterC9C10={filterC9C10}
+  filterPorterKresge={filterPorterKresge}
+  filterCowellStevenson={filterCowellStevenson}
+  filterRccOakes={filterRccOakes}
+  filterCrownMerill={filterCrownMerill}
+  
+/>
     </ThemeProvider>
   );
 }

@@ -12,12 +12,15 @@ import Event from "./Components/EventCard";
 import Filters from "./Components/filters";
 import CreateEvent from "./Components/CreateEvent";
 
-export default function Landing({ eventList }) {
-  const [filterValue, setFilterValue] = useState("All");
-  const filterByAccount = (accountToFilter) => {
-    const filteredEvents = eventList.filter((event) => event.account === accountToFilter);
-    //setFilteredEventList(filteredEvents);
-  };
+export default function Landing({
+  eventList,
+  resetFilter,
+  filterC9C10,
+  filterPorterKresge,
+  filterCowellStevenson,
+  filterRccOakes,
+  filterCrownMerill,
+}) {
   return (
     <div
       style={{
@@ -59,7 +62,14 @@ export default function Landing({ eventList }) {
           </Typography>
           
           <Stack direction = "row">
-            <Filters handleFilterChange={filterByAccount} />
+          <Filters
+    resetFilter={resetFilter}
+    filterC9C10={filterC9C10}
+    filterPorterKresge={filterPorterKresge}
+    filterCowellStevenson={filterCowellStevenson}
+    filterRccOakes={filterRccOakes}
+    filterCrownMerill={filterCrownMerill}
+  />
           </Stack>
 
           <Stack direction="column" alignItems="center" textAlign="center" spacing={2}>

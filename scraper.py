@@ -13,7 +13,7 @@ password = "slugslugslug"  # Replace with your password
 cl = Client()
 cl.login(username, password)
 
-user_id = cl.user_id_from_username("ucsc9_jrl")
+user_id = cl.user_id_from_username("cowell.ucsc")
 medias = cl.user_medias(user_id, 20)
 
 for media in medias:
@@ -22,7 +22,7 @@ for media in medias:
 
     # Prepare the data to be stored in Firestore
     data = {
-        "account": "ucsc9_jrl",
+        "account": "cowell.ucsc",
         "imageSrc": media.thumbnail_url,
         "description": media.caption_text,
         "date_posted": media.taken_at,
