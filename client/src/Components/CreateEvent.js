@@ -11,12 +11,10 @@ import {
   DialogActions,
 } from "@mui/material";
 
-export default function CreateEvent() {
+export default function CreateEvent({ onClose }) {
   return (
     <>
       <Box
-        height="100vh"
-        width="100vw"
         sx={{
           display: "flex",
           flexDirection: "column",
@@ -35,11 +33,11 @@ export default function CreateEvent() {
               Create an Event
             </Typography>
 
-            <Grid container spacing={4}>
+            <Grid container spacing={0}>
               <Grid item xs={12} sm={6}>
                 <Card
                   sx={{
-                    width: "70vw",
+                    width: "60vw",
                     backgroundColor: "background.paper",
                     borderRadius: "16px",
                   }}
@@ -48,6 +46,7 @@ export default function CreateEvent() {
                     direction="column"
                     alignItems="center"
                     textAlign="center"
+                    sx={{ display: 'flex', flexDirection: 'column' }}
                   >
                     <CardContent>
                       <Typography
@@ -61,7 +60,8 @@ export default function CreateEvent() {
                         id="outlined-basic"
                         label="Event Title"
                         variant="outlined"
-                        sx={{ width: "50vw" }}
+                        multiline
+                        sx={{ width: "50vw", noWrap: "false"}}
                       />
                       <Typography
                         variant="h4"
@@ -88,11 +88,11 @@ export default function CreateEvent() {
                         <input type="file" hidden />
                       </Button>
                     </CardContent>
-                    <DialogActions>
-                      <Button variant="contained" component="label">
+                    <DialogActions sx={{ mt: 'auto' }}>
+                      <Button variant="contained" sx={{ width: "100%" }}>
                         <Typography>Submit</Typography>
                       </Button>
-                      <Button variant="contained" component="label">
+                      <Button variant="contained" sx={{ width: "100%" }} onClick = {onClose}>
                         <Typography>Close</Typography>
                       </Button>
                     </DialogActions>

@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+import { useState} from 'react';
 import {
   Box,
   Typography,
@@ -11,6 +12,7 @@ import {
 import Event from "./Components/EventCard";
 import Filters from "./Components/filters";
 import CreateEvent from "./Components/CreateEvent";
+import Popups from "./Components/popups";
 
 export default function Landing({
   eventList,
@@ -21,6 +23,10 @@ export default function Landing({
   filterRccOakes,
   filterCrownMerill,
 }) {
+  const [buttonPopup, setButtonPopup] = useState(false);
+  const handlePopupClose = () => {
+    setButtonPopup(false);
+  };
   return (
     <div
       style={{
@@ -82,7 +88,14 @@ export default function Landing({
               />
             ))}
           </Stack>
-          <CreateEvent></CreateEvent>
+          <div className="spec_btn">
+            <button class = "button btn7" onClick={() => setButtonPopup(true)} style={{ position: "absolute", top: "20px", right: "20px",}}>
+              Create Event
+            </button>
+          </div>
+            <Popups trigger={buttonPopup}>
+              <CreateEvent onClose = {handlePopupClose}> </CreateEvent>
+            </Popups>
         </Stack>
       </Box>
     </div>
