@@ -1,10 +1,13 @@
 import React from "react";
 import { Card, CardContent, Stack, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 // Props.title = Event Title
 // Props.description = event description
 // Props.imageSrc = flyer from event
 const Event = (props) => {
+  const navigate = useNavigate()
+
   return (
     <Stack spacing={2} direction="column" alignItems="center">
       <Card
@@ -13,6 +16,7 @@ const Event = (props) => {
           backgroundColor: "background.paper",
           borderRadius: "16px",
         }}
+        onClick={() => navigate('/info')}
       >
         <Stack direction="column" alignItems="center" textAlign="center">
           <CardContent>
