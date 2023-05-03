@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 // Props.title = Event Title
 // Props.description = event description
-// Props.imageSrc = flyer from event
+// Props.imageSrc = flyer from event 
 const Event = (props) => {
   const navigate = useNavigate()
 
