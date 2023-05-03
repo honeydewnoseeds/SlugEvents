@@ -6,15 +6,12 @@ import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
-
-function sayHi() {
-  console.log("Hello!");
-}
+import { useNavigate } from "react-router-dom";
 
 function Board() {
+  const navigate = useNavigate()
   return (
     <>
-
 <Box
       height="100vh"
       width="100vw"
@@ -31,7 +28,7 @@ function Board() {
       }}
     >
     <Grid container justifyContent="flex-start">
-      <IconButton onClick={sayHi}>
+      <IconButton onClick={() => navigate('/landing')}>
         <ArrowBackIcon />
       </ IconButton>
     </Grid>

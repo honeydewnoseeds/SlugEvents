@@ -8,9 +8,9 @@ import {
   // CardHeader,
   // useThemeProps,
 } from "@mui/material";
-import Event from "./Components/EventCard";
-import Filters from "./Components/filters";
-import CreateEvent from "./Components/CreateEvent";
+import Event from "../Components/EventCard";
+import Filters from "../Components/filters";
+import CreateEvent from "../Components/CreateEvent";
 
 export default function Landing({
   eventList,
@@ -21,6 +21,8 @@ export default function Landing({
   filterRccOakes,
   filterCrownMerill,
 }) {
+
+
   return (
     <div
       style={{
