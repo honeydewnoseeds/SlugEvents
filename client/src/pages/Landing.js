@@ -71,6 +71,7 @@ export default function Landing({
               alignSelf: "flex-end",
               marginTop: "-5",
               position: "absolute",
+              color: "#FFFFFF",
             }}
           >
             Create Event

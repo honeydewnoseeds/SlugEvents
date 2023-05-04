@@ -16,7 +16,6 @@ export default function CreateEvent({ onClose }) {
     <>
       <Box
         sx={{
-          display: "flex",
           flexDirection: "column",
           alignItems: "center",
           backgroundColor: "background.default",
@@ -29,7 +28,12 @@ export default function CreateEvent({ onClose }) {
             alignItems="center"
             textAlign="center"
           >
-            <Typography variant="h2" color="text.secondary">
+            <Typography
+              variant="h2"
+              color="text.secondary"
+              width="60vw"
+              paddingTop="10px"
+            >
               Create an Event
             </Typography>
 
@@ -46,9 +50,9 @@ export default function CreateEvent({ onClose }) {
                     direction="column"
                     alignItems="center"
                     textAlign="center"
-                    sx={{ display: 'flex', flexDirection: 'column' }}
+                    sx={{ display: "flex", flexDirection: "column" }}
                   >
-                    <CardContent>
+                    <CardContent sx={{ maxHeight: "70vh", overflowY: "auto" }}>
                       <Typography
                         variant="h4"
                         sx={{ textAlign: "center", color: "primary.main" }}
@@ -61,7 +65,7 @@ export default function CreateEvent({ onClose }) {
                         label="Event Title"
                         variant="outlined"
                         multiline
-                        sx={{ width: "50vw", noWrap: "false"}}
+                        sx={{ width: "100%", marginBottom: 2 }}
                       />
                       <Typography
                         variant="h4"
@@ -75,7 +79,7 @@ export default function CreateEvent({ onClose }) {
                         label="Event Description"
                         variant="outlined"
                         multiline
-                        sx={{ width: "50vw", noWrap: "false" }}
+                        sx={{ width: "100%", marginBottom: 2 }}
                       />
                       <Typography
                         variant="h4"
@@ -88,11 +92,15 @@ export default function CreateEvent({ onClose }) {
                         <input type="file" hidden />
                       </Button>
                     </CardContent>
-                    <DialogActions sx={{ mt: 'auto' }}>
+                    <DialogActions sx={{ mt: "auto" }}>
                       <Button variant="contained" sx={{ width: "100%" }}>
                         <Typography>Submit</Typography>
                       </Button>
-                      <Button variant="contained" sx={{ width: "100%" }} onClick = {onClose}>
+                      <Button
+                        variant="contained"
+                        sx={{ width: "100%" }}
+                        onClick={onClose}
+                      >
                         <Typography>Close</Typography>
                       </Button>
                     </DialogActions>
