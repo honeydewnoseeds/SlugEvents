@@ -1,9 +1,10 @@
 import React from "react";
-import { useState} from 'react';
+import { useState } from "react";
 import {
   Box,
   Typography,
   Stack,
+  Button,
   // Card,
   // CardContent,
   // CardHeader,
@@ -37,9 +38,9 @@ export default function Landing({
       }}
     >
       <Box
-        height= "auto"
-        minHeight = "100vh"
-        width= "auto"
+        height="auto"
+        minHeight="100vh"
+        width="auto"
         //auto fit constraints
         flexGrow={1}
         sx={{
@@ -63,22 +64,39 @@ export default function Landing({
             alignItems: "center",
           }}
         >
+          <Button
+            variant="contained"
+            onClick={() => setButtonPopup(true)}
+            sx={{
+              alignSelf: "flex-end",
+              marginTop: "-5",
+              position: "absolute",
+            }}
+          >
+            Create Event
+          </Button>
+
           <Typography variant="h2" color="text.secondary">
             SlugEvents
           </Typography>
-          
-          <Stack direction = "row">
-          <Filters
-    resetFilter={resetFilter}
-    filterC9C10={filterC9C10}
-    filterPorterKresge={filterPorterKresge}
-    filterCowellStevenson={filterCowellStevenson}
-    filterRccOakes={filterRccOakes}
-    filterCrownMerill={filterCrownMerill}
-  />
+
+          <Stack direction="row" spacing={2}>
+            <Filters
+              resetFilter={resetFilter}
+              filterC9C10={filterC9C10}
+              filterPorterKresge={filterPorterKresge}
+              filterCowellStevenson={filterCowellStevenson}
+              filterRccOakes={filterRccOakes}
+              filterCrownMerill={filterCrownMerill}
+            />
           </Stack>
 
-          <Stack direction="column" alignItems="center" textAlign="center" spacing={2}>
+          <Stack
+            direction="column"
+            alignItems="center"
+            textAlign="center"
+            spacing={2}
+          >
             {eventList.map((event) => (
               <Event
                 key={event.title}
@@ -88,15 +106,10 @@ export default function Landing({
               />
             ))}
           </Stack>
-          <div className="spec_btn">
-            <button class = "button btn7" onClick={() => setButtonPopup(true)} style={{ position: "absolute", top: "20px", right: "20px",}}>
-              Create Event
-            </button>
-          </div>
-            <Popups trigger={buttonPopup}>
-              <CreateEvent onClose = {handlePopupClose}> </CreateEvent>
-            </Popups>
         </Stack>
+        <Popups trigger={buttonPopup}>
+          <CreateEvent onClose={handlePopupClose}> </CreateEvent>
+        </Popups>
       </Box>
     </div>
   );

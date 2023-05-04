@@ -1,4 +1,5 @@
 import React from "react";
+import Button from "@mui/material/Button";
 
 function Filters({
   resetFilter,
@@ -9,26 +10,50 @@ function Filters({
   filterCrownMerill,
 }) {
   return (
-    <div className="btns">
-      <button class = "button btn1" value="All" onClick={resetFilter}>
+    <>
+      <Button
+        variant="contained"
+        onClick={resetFilter}
+        sx={{ backgroundColor: "#FFB6C1", color: "#FFFFFF" }}
+      >
         All
-      </button>
-      <button class = "button btn2" value="College 9, College 10, College 9/10" onClick={filterC9C10}>
+      </Button>
+      <Button
+        variant="contained"
+        onClick={filterC9C10}
+        sx={{ backgroundColor: "#FFB6C1", color: "#FFFFFF" }}
+      >
         College 9/10
-      </button>
-      <button class = "button btn3" value="Cowell, Stevenson" onClick={filterCowellStevenson}>
+      </Button>
+      <Button
+        variant="contained"
+        onClick={filterCowellStevenson}
+        sx={{ backgroundColor: "#FFB6C1", color: "#FFFFFF" }}
+      >
         Cowell/Stevenson
-      </button>
-      <button class = "button btn4" value="Porter, Kresge" onClick={filterPorterKresge}>
+      </Button>
+      <Button
+        variant="contained"
+        onClick={filterPorterKresge}
+        sx={{ backgroundColor: "#FFB6C1", color: "#FFFFFF" }}
+      >
         Porter/Kresge
-      </button>
-      <button class = "button btn5" value="Oakes, RCC" onClick={filterRccOakes}>
+      </Button>
+      <Button
+        variant="contained"
+        onClick={filterRccOakes}
+        sx={{ backgroundColor: "#FFB6C1", color: "#FFFFFF" }}
+      >
         Oakes/RCC
-      </button>
-      <button class = "button btn6" value = "Crown, Merill" onClick={filterCrownMerill}>
-        Crown/Merill
-      </button>
-    </div>
+      </Button>
+      <Button
+        variant="contained"
+        onClick={filterCrownMerill}
+        sx={{ backgroundColor: "#FFB6C1", color: "#FFFFFF" }}
+      >
+        Crown/Merrill
+      </Button>
+    </>
   );
 }
 
