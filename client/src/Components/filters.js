@@ -14,7 +14,7 @@ function Filters({
       <Button
         variant="contained"
         onClick={resetFilter}
-        sx={{ backgroundColor: "#FFB6C1", color: "#000000" }}
+        sx={{ backgroundColor: "#FFB6C1", color: "#000000", size: "large" }}
       >
         All
       </Button>
@@ -42,14 +42,21 @@ function Filters({
       <Button
         variant="contained"
         onClick={filterRccOakes}
-        sx={{ backgroundColor: "#EAF2D7", color: "#000000" }}
+        sx={{
+          backgroundColor: "#EAF2D7",
+          color: "#000000",
+          textAlign: "center",
+        }}
       >
         Oakes/RCC
       </Button>
       <Button
         variant="contained"
         onClick={filterCrownMerill}
-        sx={{ backgroundColor: "#B3DEE2", color: "#000000" }}
+        sx={{
+          backgroundColor: "#B3DEE2",
+          color: "#000000",
+        }}
       >
         Crown/Merrill
       </Button>
