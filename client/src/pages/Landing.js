@@ -41,6 +41,7 @@ export default function Landing({
         height="auto"
         minHeight="100vh"
         width="auto"
+        // overflow="hidden"
         overflow = "hidden"
 
         //auto fit constraints
