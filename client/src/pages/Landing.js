@@ -42,7 +42,6 @@ export default function Landing({
         minHeight="100vh"
         width="auto"
         // overflow="hidden"
-        overflow = "hidden"
 
         //auto fit constraints
         flexGrow={1}
