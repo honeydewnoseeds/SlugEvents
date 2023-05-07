@@ -1,4 +1,6 @@
 import React from "react";
+import Button from "@mui/material/Button";
+import { useMediaQuery } from "@mui/material";
 
 function Filters({
   resetFilter,
@@ -8,27 +10,86 @@ function Filters({
   filterRccOakes,
   filterCrownMerill,
 }) {
+
+  const isSmallScreen = useMediaQuery("(max-width:400px)");
+
+  const buttonStyle = {
+    whiteSpace: "nowrap",
+    fontSize: isSmallScreen ? "8px" : "16px",
+    minWidth: isSmallScreen ? "10px" : "5px",
+    maxHeight: isSmallScreen ? "30px" : "30px",
+    margin: "5px",
+  };
   return (
-    <div className="btns">
-      <button class = "button btn1" value="All" onClick={resetFilter}>
+    <>
+      <Button
+        variant="contained"
+        onClick={resetFilter}
+<<<<<<< HEAD
+        sx={{ backgroundColor: "#FFB6C1", color: "#000000" }}
+        style={buttonStyle}
+=======
+        sx={{ backgroundColor: "#FFB6C1", color: "#000000", size: "large" }}
+>>>>>>> dc46cca2dd8b01834f34a4eae347b1dc3e9b40f2
+      >
         All
-      </button>
-      <button class = "button btn2" value="College 9, College 10, College 9/10" onClick={filterC9C10}>
+      </Button>
+      <Button
+        variant="contained"
+        onClick={filterC9C10}
+        sx={{ backgroundColor: "#E27396", color: "#000000" }}
+        style={buttonStyle}
+      >
         College 9/10
-      </button>
-      <button class = "button btn3" value="Cowell, Stevenson" onClick={filterCowellStevenson}>
+      </Button>
+      <Button
+        variant="contained"
+        onClick={filterCowellStevenson}
+        sx={{ backgroundColor: "#EA9AB2", color: "#000000" }}
+        style={buttonStyle}
+      >
         Cowell/Stevenson
-      </button>
-      <button class = "button btn4" value="Porter, Kresge" onClick={filterPorterKresge}>
+      </Button>
+      <Button
+        variant="contained"
+        onClick={filterPorterKresge}
+        sx={{ backgroundColor: "#EFCFE3", color: "#000000" }}
+        style={buttonStyle}
+      >
         Porter/Kresge
-      </button>
-      <button class = "button btn5" value="Oakes, RCC" onClick={filterRccOakes}>
+      </Button>
+      <Button
+        variant="contained"
+        onClick={filterRccOakes}
+<<<<<<< HEAD
+        sx={{ backgroundColor: "#EAF2D7", color: "#000000" }}
+        style={buttonStyle}
+=======
+        sx={{
+          backgroundColor: "#EAF2D7",
+          color: "#000000",
+          textAlign: "center",
+        }}
+>>>>>>> dc46cca2dd8b01834f34a4eae347b1dc3e9b40f2
+      >
         Oakes/RCC
-      </button>
-      <button class = "button btn6" value = "Crown, Merill" onClick={filterCrownMerill}>
-        Crown/Merill
-      </button>
-    </div>
+      </Button>
+      <Button
+        variant="contained"
+        onClick={filterCrownMerill}
+<<<<<<< HEAD
+        sx={{ backgroundColor: "#B3DEE2", color: "#000000" }}
+        style={buttonStyle}
+=======
+        sx={{
+          backgroundColor: "#B3DEE2",
+          color: "#000000",
+        }}
+>>>>>>> dc46cca2dd8b01834f34a4eae347b1dc3e9b40f2
+      >
+        Crown/Merrill
+      </Button>
+    </>
   );
 }
 

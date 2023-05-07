@@ -4,13 +4,13 @@ import './App.css';
 import { db } from './config/firebase';
 import { getDocs, collection } from "firebase/firestore";
 import { addDoc } from "firebase/firestore";
-import Landing from "./Landing";
-import Info from "./info";
-import "./App.css";
+import Landing from "./pages/Landing";
+import Info from "./pages/Info";
 import { ThemeProvider } from "@mui/material";
 import { themeOptions } from "./Components/theme";
 import { deleteDoc, doc, writeBatch } from "firebase/firestore";
 import { onSnapshot } from "firebase/firestore";
+import { Routes, Route, BrowserRouter} from 'react-router-dom';
 
 function App() {
   const [eventList, setEventList] = useState([]);
@@ -116,16 +116,27 @@ const addEvent = async (event = {
 
   return (
     <ThemeProvider theme={themeOptions}>
-      <Landing
-  eventList={filteredEventList || eventList}
-  resetFilter={resetFilter}
-  filterC9C10={filterC9C10}
-  filterPorterKresge={filterPorterKresge}
-  filterCowellStevenson={filterCowellStevenson}
-  filterRccOakes={filterRccOakes}
-  filterCrownMerill={filterCrownMerill}
-  
-/>
+      <BrowserRouter>
+        <Routes>
+          <Route index element={<Landing 
+            eventList={filteredEventList || eventList}
+            resetFilter={resetFilter}
+            filterC9C10={filterC9C10}
+            filterPorterKresge={filterPorterKresge}
+            filterCowellStevenson={filterCowellStevenson}
+            filterRccOakes={filterRccOakes}
+            filterCrownMerill={filterCrownMerill}/>} />
+          <Route path="/landing" element={<Landing 
+            eventList={filteredEventList || eventList}
+            resetFilter={resetFilter}
+            filterC9C10={filterC9C10}
+            filterPorterKresge={filterPorterKresge}
+            filterCowellStevenson={filterCowellStevenson}
+            filterRccOakes={filterRccOakes}
+            filterCrownMerill={filterCrownMerill}/>} />
+          <Route path="/info" element={<Info />} />
+        </Routes>
+      </BrowserRouter>
     </ThemeProvider>
   );
 }
