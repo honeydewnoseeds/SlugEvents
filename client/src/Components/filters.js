@@ -25,8 +25,12 @@ function Filters({
       <Button
         variant="contained"
         onClick={resetFilter}
+<<<<<<< HEAD
         sx={{ backgroundColor: "#FFB6C1", color: "#000000" }}
         style={buttonStyle}
+=======
+        sx={{ backgroundColor: "#FFB6C1", color: "#000000", size: "large" }}
+>>>>>>> dc46cca2dd8b01834f34a4eae347b1dc3e9b40f2
       >
         All
       </Button>
@@ -57,16 +61,31 @@ function Filters({
       <Button
         variant="contained"
         onClick={filterRccOakes}
+<<<<<<< HEAD
         sx={{ backgroundColor: "#EAF2D7", color: "#000000" }}
         style={buttonStyle}
+=======
+        sx={{
+          backgroundColor: "#EAF2D7",
+          color: "#000000",
+          textAlign: "center",
+        }}
+>>>>>>> dc46cca2dd8b01834f34a4eae347b1dc3e9b40f2
       >
         Oakes/RCC
       </Button>
       <Button
         variant="contained"
         onClick={filterCrownMerill}
+<<<<<<< HEAD
         sx={{ backgroundColor: "#B3DEE2", color: "#000000" }}
         style={buttonStyle}
+=======
+        sx={{
+          backgroundColor: "#B3DEE2",
+          color: "#000000",
+        }}
+>>>>>>> dc46cca2dd8b01834f34a4eae347b1dc3e9b40f2
       >
         Crown/Merrill
       </Button>

@@ -41,8 +41,6 @@ export default function Landing({
         height="auto"
         minHeight="100vh"
         width="auto"
-        // overflow="hidden"
-
         //auto fit constraints
         flexGrow={1}
         sx={{
@@ -106,6 +104,7 @@ export default function Landing({
                 title={event.title}
                 description={event.description}
                 imageSrc={event.imageSrc}
+                account={event.account}
               />
             ))}
           </Stack>
