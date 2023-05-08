@@ -38,7 +38,7 @@ const Event = (props) => {
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
-        width: "auto",
+        width: "100%",
         backgroundColor: color(props.account),
         borderRadius: "16px",
       }}
@@ -49,13 +49,13 @@ const Event = (props) => {
         alt={props.title}
         style={{
           width: "30%",
-          height: "auto",
+          height: "100%", // Set a fixed height for the images
           objectFit: "cover",
           borderRadius: "16px 0 0 16px",
         }}
       />
       <CardContent>
-        <Grid container direction="column" spacing={2}>
+        <Grid container direction="row" spacing={2}>
           <Grid item>
             <Typography variant="h4" color="primary">
               {props.title}
