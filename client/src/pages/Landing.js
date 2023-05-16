@@ -5,6 +5,7 @@ import {
   Typography,
   Stack,
   Button,
+  IconButton,
   // Card,
   // CardContent,
   // CardHeader,
@@ -14,6 +15,7 @@ import Event from "../Components/EventCard";
 import Filters from "../Components/filters";
 import CreateEvent from "../Components/CreateEvent";
 import Popups from "../Components/popups";
+import AddRoundedIcon from '@mui/icons-material/AddRounded';
 
 export default function Landing({
   eventList,
@@ -28,6 +30,7 @@ export default function Landing({
   const handlePopupClose = () => {
     setButtonPopup(false);
   };
+
   return (
     <div
       style={{
@@ -64,18 +67,21 @@ export default function Landing({
             alignItems: "center",
           }}
         >
-          <Button
+          <IconButton 
+            size="large"
             variant="contained"
             onClick={() => setButtonPopup(true)}
             sx={{
-              alignSelf: "flex-end",
-              marginTop: "-5",
-              position: "absolute",
-              color: "#FFFFFF",
+              
+              alignSelf: "right",
+              right: 40,
+              bottom: 40,
+              position: "fixed",
+              backgroundColor: "#F7AF9D"
             }}
           >
-            Create Event
-          </Button>
+            <AddRoundedIcon/>
+          </IconButton>
 
           <Typography variant="h2" color="text.secondary">
             SlugEvents
