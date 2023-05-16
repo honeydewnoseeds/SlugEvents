@@ -16,6 +16,7 @@ import Filters from "../Components/filters";
 import CreateEvent from "../Components/CreateEvent";
 import Popups from "../Components/popups";
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
+import { useMediaQuery } from "@mui/material";
 
 export default function Landing({
   eventList,
@@ -30,6 +31,7 @@ export default function Landing({
   const handlePopupClose = () => {
     setButtonPopup(false);
   };
+  const isSmallScreen = useMediaQuery("(max-width:400px)");
 
   return (
     <div
@@ -68,19 +70,24 @@ export default function Landing({
           }}
         >
           <IconButton 
-            size="large"
+            size= "large"
             variant="contained"
             onClick={() => setButtonPopup(true)}
-            sx={{
-              
+            sx={{ 
               alignSelf: "right",
-              right: 40,
-              bottom: 40,
+              right: 50,
+              bottom: 50,
               position: "fixed",
-              backgroundColor: "#F7AF9D"
+              backgroundColor: "#F7AF9D",
+              width: isSmallScreen ? "90px" : "60px",
+              height: isSmallScreen ? "90px" : "60px",
             }}
           >
-            <AddRoundedIcon/>
+            <AddRoundedIcon
+            sx={{
+              frontSize: isSmallScreen ? "100px" : "50px"
+            }}
+            />
           </IconButton>
 
           <Typography variant="h2" color="text.secondary">
