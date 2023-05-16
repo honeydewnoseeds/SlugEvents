@@ -1,16 +1,21 @@
-import React, { useState } from "react";
-import { Box, Typography, Stack, Button, IconButton } from "@mui/material";
+import React from "react";
+import { useState } from "react";
+import {
+  Box,
+  Typography,
+  Stack,
+  Button,
+  IconButton,
+  // Card,
+  // CardContent,
+  // CardHeader,
+  // useThemeProps,
+} from "@mui/material";
 import Event from "../Components/EventCard";
 import Filters from "../Components/filters";
 import CreateEvent from "../Components/CreateEvent";
 import Popups from "../Components/popups";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
-import MapIcon from "@mui/icons-material/MapSharp";
-import AccountIcon from "@mui/icons-material/AccountBox";
-import CloseIcon from "@mui/icons-material/Close";
-import { useMediaQuery } from "@mui/material";
-import MapContainer from "../map";
-import useScrollBlock from "../Components/useScrollBlock";
 
 export default function Landing({
   eventList,
@@ -24,15 +29,6 @@ export default function Landing({
   const [buttonPopup, setButtonPopup] = useState(false);
   const handlePopupClose = () => {
     setButtonPopup(false);
-  };
-
-  const [showMap, setShowMap] = useState(false);
-  const [blockScroll, allowScroll] = useScrollBlock();
-
-  const isSmallScreen = useMediaQuery("(max-width:500px)");
-
-  const handleCloseMap = () => {
-    setShowMap(false);
   };
 
   return (
@@ -85,7 +81,10 @@ export default function Landing({
         <IconButton
           size="medium"
           variant="contained"
-          onClick={() => {blockScroll(); setShowMap(true);}}
+          onClick={() => {
+            blockScroll();
+            setShowMap(true);
+          }}
           sx={{
             alignSelf: "right",
             right: 20,
@@ -126,7 +125,22 @@ export default function Landing({
             alignItems: "center",
           }}
         >
-          <Typography variant="h2" color="text.secondary" fontWeight="normal">
+          <IconButton
+            size="large"
+            variant="contained"
+            onClick={() => setButtonPopup(true)}
+            sx={{
+              alignSelf: "right",
+              right: 40,
+              bottom: 40,
+              position: "fixed",
+              backgroundColor: "#F7AF9D",
+            }}
+          >
+            <AddRoundedIcon />
+          </IconButton>
+
+          <Typography variant="h2" color="text.secondary">
             SlugEvents
           </Typography>
 
@@ -161,7 +175,7 @@ export default function Landing({
         <Popups trigger={buttonPopup}>
           <CreateEvent onClose={handlePopupClose}> </CreateEvent>
         </Popups>
-        {showMap && ( 
+        {showMap && (
           <>
             <MapContainer handleCloseMap={handleCloseMap} />
             <IconButton
@@ -170,7 +184,7 @@ export default function Landing({
               onClick={() => {
                 handleCloseMap();
                 allowScroll();
-              }}              
+              }}
               sx={{
                 position: "fixed",
                 top: 10,
