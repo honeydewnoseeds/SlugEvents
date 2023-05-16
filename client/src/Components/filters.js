@@ -14,10 +14,11 @@ function Filters({
 
   const buttonStyle = {
     whiteSpace: "nowrap",
-    fontSize: isSmallScreen ? "8px" : "16px",
-    minWidth: isSmallScreen ? "5px" : "10px",
+    fontSize: isSmallScreen ? "16px" : "16px",
+    minWidth: isSmallScreen ? "20px" : "10px",
     maxHeight: "30px",
     margin: "5px",
+    borderRadius: "16px",
   };
   return (
     <>
@@ -37,11 +38,7 @@ function Filters({
       <Button
         variant="contained"
         onClick={filterC9C10}
-        sx={{
-          backgroundColor: "#E27396",
-          color: "#000000",
-          fontWeight: "normal",
-        }}
+        sx={{ backgroundColor: "#E27396", color: "#000000" }}
         style={buttonStyle}
       >
         College 9/10
