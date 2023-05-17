@@ -15,6 +15,7 @@ import Event from "../Components/EventCard";
 import Filters from "../Components/filters";
 import CreateEvent from "../Components/CreateEvent";
 import Popups from "../Components/popups";
+import Header from "../Components/header";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import { useMediaQuery } from "@mui/material";
 
@@ -36,12 +37,13 @@ export default function Landing({
   return (
     <div
       style={{
-        display: "flex",
+        //display: "flex",
         alignItems: "center",
         textAlign: "center",
         height: "100%",
       }}
     >
+      <Header></Header>
       <Box
         height="auto"
         minHeight="150vh"
@@ -147,10 +149,6 @@ export default function Landing({
               }}
             />
           </IconButton>
-
-          <Typography variant="h2" color="text.secondary">
-            SlugEvents
-          </Typography>
 
           <Stack direction="row" spacing={2}>
             <Filters
