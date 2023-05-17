@@ -31,7 +31,7 @@ class MapContainer extends Component {
     },
   };
   
-
+  // Gets user location right when map is created
   componentDidMount() {
     if (navigator.geolocation) {
       // Watch user's position
@@ -54,7 +54,7 @@ class MapContainer extends Component {
     this.geocodeMarker('NAMASTE', 'Namaste Lounge, Santa Cruz, CA 95064');
 
   }
-
+  // Gets coords the map marker for the markerName givent the location
   geocodeMarker = async (markerName, locationName) => {
     try {
       const response = await axios.get(
@@ -62,12 +62,12 @@ class MapContainer extends Component {
           locationName
         )}&key=AIzaSyCacmRJcKR4bTsQbhE8V2kSQ3e9okKOFSE`
       );
-
+      // {Latitude, Longitude} from api call
       const {results} = response.data;
-
+      // If a valid coordinate is found
       if (results && results.length > 0) {
         const {lat, lng} = results[0].geometry.location;
-
+        // Sets the markerName to the coordinates found
         this.setState((prevState) => ({
           geocodedMarkers: {
             ...prevState.geocodedMarkers,
@@ -82,7 +82,7 @@ class MapContainer extends Component {
     }
   };
 
-  // Stops tracking user's location
+  // Stops tracking user's location when component is closed
   componentWillUnmount() {
     if (navigator.geolocation) {
       // Clear the watch position
@@ -112,10 +112,11 @@ class MapContainer extends Component {
 
   render() {
     const {userLocation, isInfoWindowOpen} = this.state;
+    // If there aren't valid coords for user location then just return
     if (!userLocation.lat || !userLocation.lng) {
       return <div>Loading...</div>;
     }
-
+    // Style of Current location marker
     const markerImageStyle = {
       url: image,
       scaledSize: new this.props.google.maps.Size(
@@ -125,14 +126,15 @@ class MapContainer extends Component {
       opacity: 0.8
     };
 
-
+    // Used to center map
     const UCSCMID = {
       lat: 36.99548112809275, 
       lng: -122.06084628167693
     }
 
     const {geocodedMarkers} = this.state;
-
+    
+    // 
     return (
       <Map
         google={this.props.google}
