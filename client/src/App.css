@@ -3,7 +3,7 @@
 }
 
 .App-logo {
-  height: 40vmin;
+  
   pointer-events: none;
 }
 
@@ -28,6 +28,11 @@
   color: #61dafb;
 }
 
+image {
+  width: 100%;
+  object-fit: cover;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -36,3 +41,34 @@
     transform: rotate(360deg);
   }
 }
+
+
+
+.btns{
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.btns button{
+  width: 120px;
+  height: 40px;
+  margin: 5px;
+  border-radius: 90%;
+}
+
+.spec_btn button{
+  width: 90px;
+  height: 30px;
+  margin: 5px;
+  border-radius: 45%;
+}
+
+.btn1 {background-color: #B0D0D3;}
+.btn2 {background-color: #C08497;}
+.btn3 {background-color: #F7AF9D;}
+.btn4 {background-color: #1bd7a8;}
+.btn5 {background-color: #cc2a2a;}
+.btn6 {background-color: #e766b5;}
+
+.btn7 {background-color: #dedfc3;}
