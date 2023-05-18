@@ -37,14 +37,13 @@ export default function Landing({
   return (
     <div
       style={{
-        //display: "flex",
+        display: "flex",
         alignItems: "center",
         textAlign: "center",
         height: "100%",
       }}
     >
-    <Header></Header>
-      <Box
+    <Box
         height="auto"
         minHeight="100vh"
         width="auto"
@@ -59,6 +58,7 @@ export default function Landing({
           backgroundColor: "background.default",
         }}
       >
+    <Header></Header> 
         <Stack
           spacing={2}
           direction="column"

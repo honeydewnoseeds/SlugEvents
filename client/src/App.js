@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import logo from './logo.svg';
 import './App.css';
 import { db } from './config/firebase';
 import { getDocs, collection } from "firebase/firestore";
