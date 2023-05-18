@@ -9,6 +9,7 @@ import MapIcon from "@mui/icons-material/MapSharp";
 import AccountIcon from "@mui/icons-material/AccountBox";
 import { useMediaQuery } from "@mui/material";
 import { Link } from "react-router-dom";
+import Header from "../Components/header";
 
 export default function Landing({
   eventList,
@@ -24,7 +25,7 @@ export default function Landing({
     setButtonPopup(false);
   };
 
-  const isSmallScreen = useMediaQuery("(max-width:400px)");
+  const isSmallScreen = useMediaQuery("(max-width:500px)");
 
   return (
     <div
@@ -51,7 +52,7 @@ export default function Landing({
         }}
       >
         <IconButton
-          size="medium"
+          size ="medium"
           variant="contained"
           onClick={() => setButtonPopup(true)}
           sx={{
@@ -112,6 +113,7 @@ export default function Landing({
             alignItems: "center",
           }}
         >
+
           <Typography variant="h2" color="text.secondary">
             SlugEvents
           </Typography>
