@@ -15,6 +15,8 @@ import Filters from "../Components/filters";
 import CreateEvent from "../Components/CreateEvent";
 import Popups from "../Components/popups";
 
+import { Link } from "react-router-dom";
+
 export default function Landing({
   eventList,
   resetFilter,
@@ -52,6 +54,19 @@ export default function Landing({
           backgroundColor: "background.default",
         }}
       >
+
+          <Button
+            variant="contained"
+            onClick={() => setButtonPopup(true)}
+            sx={{
+              alignSelf: "flex-end",
+              marginTop: "-5",
+              position: "fixed",
+              color: "#000000",
+            }}
+          >
+            Create Event
+          </Button>
         <Stack
           spacing={2}
           direction="column"
@@ -64,18 +79,6 @@ export default function Landing({
             alignItems: "center",
           }}
         >
-          <Button
-            variant="contained"
-            onClick={() => setButtonPopup(true)}
-            sx={{
-              alignSelf: "flex-end",
-              marginTop: "-5",
-              position: "absolute",
-              color: "#FFFFFF",
-            }}
-          >
-            Create Event
-          </Button>
 
           <Typography variant="h2" color="text.secondary">
             SlugEvents
@@ -112,6 +115,22 @@ export default function Landing({
         <Popups trigger={buttonPopup}>
           <CreateEvent onClose={handlePopupClose}> </CreateEvent>
         </Popups>
+
+        <Button
+          variant="contained"
+          component={Link}
+          to="/map-view"
+          sx={{
+            alignSelf: "flex-end",
+            marginTop: "60px",
+            marginRight: "15px",
+            position: "fixed",
+            color: "#000000",
+          }}
+        >
+          Map View
+        </Button>
+
       </Box>
     </div>
   );
