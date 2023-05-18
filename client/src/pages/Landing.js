@@ -37,13 +37,12 @@ export default function Landing({
   return (
     <div
       style={{
-        //display: "flex",
+        display: "flex",
         alignItems: "center",
         textAlign: "center",
         height: "100%",
       }}
     >
-      <Header></Header>
       <Box
         height="auto"
         minHeight="150vh"
@@ -65,58 +64,7 @@ export default function Landing({
           backgroundColor: "background.default",
         }}
       >
-        <IconButton
-          size="medium"
-          variant="contained"
-          onClick={() => setButtonPopup(true)}
-          sx={{
-            alignSelf: "right",
-            right: 20,
-            bottom: 10,
-            position: "fixed",
-            backgroundColor: "#F7AF9D",
-            width: isSmallScreen ? "90px" : "60px",
-            height: isSmallScreen ? "90px" : "60px",
-          }}
-        >
-          <AddRoundedIcon />
-        </IconButton>
-
-        <IconButton
-          size="medium"
-          variant="contained"
-          onClick={() => {
-            blockScroll();
-            setShowMap(true);
-          }}
-          sx={{
-            alignSelf: "right",
-            right: 20,
-            bottom: 80,
-            position: "fixed",
-            backgroundColor: "#F7AF9D",
-            width: isSmallScreen ? "90px" : "60px",
-            height: isSmallScreen ? "90px" : "60px",
-          }}
-        >
-          <MapIcon />
-        </IconButton>
-
-        <IconButton
-          size="medium"
-          variant="contained"
-          sx={{
-            alignSelf: "right",
-            right: 20,
-            bottom: 150,
-            position: "fixed",
-            backgroundColor: "#F7AF9D",
-            width: isSmallScreen ? "90px" : "60px",
-            height: isSmallScreen ? "90px" : "60px",
-          }}
-        >
-          <AccountIcon />
-        </IconButton>
+        <Header></Header>
         <Stack
           spacing={2}
           direction="column"

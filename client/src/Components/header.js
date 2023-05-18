@@ -45,28 +45,30 @@ const font = createTheme({
 
 export default function ButtonAppBar() {
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ backgroundColor: "background.default" }}>
-        <Toolbar>
-          <ThemeProvider theme={font}>
-            <Typography
-              align="left"
-              variant="h5"
-              color="text.secondary"
-              sx={{ flexGrow: 1 }}
-            >
-              SlugEvents
+    <AppBar
+      elevation={0}
+      position="static"
+      sx={{ backgroundColor: "background.default" }}
+    >
+      <Toolbar>
+        <ThemeProvider theme={font}>
+          <Typography
+            align="left"
+            variant="h5"
+            color="text.secondary"
+            sx={{ flexGrow: 1 }}
+          >
+            SlugEvents
+          </Typography>
+        </ThemeProvider>
+        <Button sx={{ backgroundColor: "primary.main" }}>
+          <ThemeProvider theme={themeOptions}>
+            <Typography variant="h7" color="text.white">
+              Login
             </Typography>
           </ThemeProvider>
-          <Button sx={{ backgroundColor: "primary.main" }}>
-            <ThemeProvider theme={themeOptions}>
-              <Typography variant="h7" color="text.white">
-                Login
-              </Typography>
-            </ThemeProvider>
-          </Button>
-        </Toolbar>
-      </AppBar>
-    </Box>
+        </Button>
+      </Toolbar>
+    </AppBar>
   );
 }
