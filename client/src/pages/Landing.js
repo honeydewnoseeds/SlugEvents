@@ -1,20 +1,13 @@
-import React from "react";
-import { useState } from "react";
-import {
-  Box,
-  Typography,
-  Stack,
-  Button,
-  // Card,
-  // CardContent,
-  // CardHeader,
-  // useThemeProps,
-} from "@mui/material";
+import React, { useState } from "react";
+import { Box, Typography, Stack, Button, IconButton } from "@mui/material";
 import Event from "../Components/EventCard";
 import Filters from "../Components/filters";
 import CreateEvent from "../Components/CreateEvent";
 import Popups from "../Components/popups";
-
+import AddRoundedIcon from "@mui/icons-material/AddRounded";
+import MapIcon from "@mui/icons-material/MapSharp";
+import AccountIcon from "@mui/icons-material/AccountBox";
+import { useMediaQuery } from "@mui/material";
 import { Link } from "react-router-dom";
 
 export default function Landing({
@@ -30,6 +23,9 @@ export default function Landing({
   const handlePopupClose = () => {
     setButtonPopup(false);
   };
+
+  const isSmallScreen = useMediaQuery("(max-width:400px)");
+
   return (
     <div
       style={{
@@ -41,7 +37,7 @@ export default function Landing({
     >
       <Box
         height="auto"
-        minHeight="100vh"
+        minHeight="150vh"
         width="auto"
         //auto fit constraints
         flexGrow={1}
@@ -54,19 +50,56 @@ export default function Landing({
           backgroundColor: "background.default",
         }}
       >
+        <IconButton
+          size="medium"
+          variant="contained"
+          onClick={() => setButtonPopup(true)}
+          sx={{
+            alignSelf: "right",
+            right: 20,
+            bottom: 10,
+            position: "fixed",
+            backgroundColor: "#F7AF9D",
+            width: isSmallScreen ? "90px" : "60px",
+            height: isSmallScreen ? "90px" : "60px",
+          }}
+        >
+          <AddRoundedIcon />
+        </IconButton>
 
-          <Button
-            variant="contained"
-            onClick={() => setButtonPopup(true)}
-            sx={{
-              alignSelf: "flex-end",
-              marginTop: "-5",
-              position: "fixed",
-              color: "#000000",
-            }}
-          >
-            Create Event
-          </Button>
+        <IconButton
+          size="medium"
+          variant="contained"
+          component={Link}
+          to="/map-view"
+          sx={{
+            alignSelf: "right",
+            right: 20,
+            bottom: 80,
+            position: "fixed",
+            backgroundColor: "#F7AF9D",
+            width: isSmallScreen ? "90px" : "60px",
+            height: isSmallScreen ? "90px" : "60px",
+          }}
+        >
+          <MapIcon />
+        </IconButton>
+
+        <IconButton
+          size="medium"
+          variant="contained"
+          sx={{
+            alignSelf: "right",
+            right: 20,
+            bottom: 150,
+            position: "fixed",
+            backgroundColor: "#F7AF9D",
+            width: isSmallScreen ? "90px" : "60px",
+            height: isSmallScreen ? "90px" : "60px",
+          }}
+        >
+          <AccountIcon />
+        </IconButton>
         <Stack
           spacing={2}
           direction="column"
@@ -79,7 +112,6 @@ export default function Landing({
             alignItems: "center",
           }}
         >
-
           <Typography variant="h2" color="text.secondary">
             SlugEvents
           </Typography>
@@ -115,22 +147,6 @@ export default function Landing({
         <Popups trigger={buttonPopup}>
           <CreateEvent onClose={handlePopupClose}> </CreateEvent>
         </Popups>
-
-        <Button
-          variant="contained"
-          component={Link}
-          to="/map-view"
-          sx={{
-            alignSelf: "flex-end",
-            marginTop: "60px",
-            marginRight: "15px",
-            position: "fixed",
-            color: "#000000",
-          }}
-        >
-          Map View
-        </Button>
-
       </Box>
     </div>
   );
