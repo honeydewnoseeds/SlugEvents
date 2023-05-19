@@ -10,7 +10,6 @@ function Filters({
   filterRccOakes,
   filterCrownMerill,
 }) {
-
   const isSmallScreen = useMediaQuery("(max-width:400px)");
 
   const buttonStyle = {
@@ -25,15 +24,24 @@ function Filters({
       <Button
         variant="contained"
         onClick={resetFilter}
-        sx={{ backgroundColor: "#FFB6C1", color: "#000000", size: "large" }}
-        style = {buttonStyle}
+        sx={{
+          backgroundColor: "#FFB6C1",
+          color: "#000000",
+          size: "large",
+          fontWeight: "normal",
+        }}
+        style={buttonStyle}
       >
         All
       </Button>
       <Button
         variant="contained"
         onClick={filterC9C10}
-        sx={{ backgroundColor: "#E27396", color: "#000000" }}
+        sx={{
+          backgroundColor: "#E27396",
+          color: "#000000",
+          fontWeight: "normal",
+        }}
         style={buttonStyle}
       >
         College 9/10
@@ -41,7 +49,11 @@ function Filters({
       <Button
         variant="contained"
         onClick={filterCowellStevenson}
-        sx={{ backgroundColor: "#EA9AB2", color: "#000000" }}
+        sx={{
+          backgroundColor: "#EA9AB2",
+          color: "#000000",
+          fontWeight: "normal",
+        }}
         style={buttonStyle}
       >
         Cowell/Stevenson
@@ -49,7 +61,11 @@ function Filters({
       <Button
         variant="contained"
         onClick={filterPorterKresge}
-        sx={{ backgroundColor: "#EFCFE3", color: "#000000" }}
+        sx={{
+          backgroundColor: "#EFCFE3",
+          color: "#000000",
+          fontWeight: "normal",
+        }}
         style={buttonStyle}
       >
         Porter/Kresge
@@ -61,8 +77,9 @@ function Filters({
           backgroundColor: "#EAF2D7",
           color: "#000000",
           textAlign: "center",
+          fontWeight: "normal",
         }}
-        style = {buttonStyle}
+        style={buttonStyle}
       >
         Oakes/RCC
       </Button>
@@ -72,8 +89,9 @@ function Filters({
         sx={{
           backgroundColor: "#B3DEE2",
           color: "#000000",
+          fontWeight: "normal",
         }}
-        style = {buttonStyle}
+        style={buttonStyle}
       >
         Crown/Merrill
       </Button>

@@ -7,8 +7,9 @@ import Popups from "../Components/popups";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import MapIcon from "@mui/icons-material/MapSharp";
 import AccountIcon from "@mui/icons-material/AccountBox";
+import CloseIcon from "@mui/icons-material/Close";
 import { useMediaQuery } from "@mui/material";
-import { Link } from "react-router-dom";
+import MapContainer from "../map";
 import Header from "../Components/header";
 
 export default function Landing({
@@ -25,7 +26,13 @@ export default function Landing({
     setButtonPopup(false);
   };
 
+  const [showMap, setShowMap] = useState(false);
+
   const isSmallScreen = useMediaQuery("(max-width:500px)");
+
+  const handleCloseMap = () => {
+    setShowMap(false);
+  };
 
   return (
     <div
@@ -43,16 +50,22 @@ export default function Landing({
         //auto fit constraints
         flexGrow={1}
         sx={{
+          ".full-screen-map": {
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+          },
           position: "relative",
           display: "flex",
           flexDirection: "column",
-          //justifyContent: "center",
           alignItems: "center",
           backgroundColor: "background.default",
         }}
       >
         <IconButton
-          size ="medium"
+          size="medium"
           variant="contained"
           onClick={() => setButtonPopup(true)}
           sx={{
@@ -71,8 +84,7 @@ export default function Landing({
         <IconButton
           size="medium"
           variant="contained"
-          component={Link}
-          to="/map-view"
+          onClick={() => setShowMap(true)}
           sx={{
             alignSelf: "right",
             right: 20,
@@ -113,8 +125,7 @@ export default function Landing({
             alignItems: "center",
           }}
         >
-
-          <Typography variant="h2" color="text.secondary">
+          <Typography variant="h2" color="text.secondary" fontWeight="normal">
             SlugEvents
           </Typography>
 
@@ -149,6 +160,23 @@ export default function Landing({
         <Popups trigger={buttonPopup}>
           <CreateEvent onClose={handlePopupClose}> </CreateEvent>
         </Popups>
+        {showMap && (
+          <>
+            <MapContainer handleCloseMap={handleCloseMap} />
+            <IconButton
+              size="medium"
+              variant="contained"
+              onClick={handleCloseMap}
+              sx={{
+                position: "fixed",
+                top: 10,
+                right: 50,
+              }}
+            >
+              <CloseIcon />
+            </IconButton>
+          </>
+        )}
       </Box>
     </div>
   );

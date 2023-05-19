@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
 import axios from 'axios';
+import MapIcon from "@mui/icons-material/MapSharp";
+import { Box, Typography, Stack, Button, IconButton } from "@mui/material";
 
 const mapStyles = {
   width: '100%',
@@ -29,8 +31,10 @@ class MapContainer extends Component {
       OAKES: null,
       NAMASTE: null
     },
+
   };
   
+
   // Gets user location right when map is created
   componentDidMount() {
     if (navigator.geolocation) {
@@ -141,6 +145,7 @@ class MapContainer extends Component {
         zoom={15.5}
         style={mapStyles}
         initialCenter={UCSCMID}
+        className="full-screen-map"
       >
         <Marker
           position={userLocation}
