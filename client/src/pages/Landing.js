@@ -10,7 +10,7 @@ import AccountIcon from "@mui/icons-material/AccountBox";
 import CloseIcon from "@mui/icons-material/Close";
 import { useMediaQuery } from "@mui/material";
 import MapContainer from "../map";
-import Header from "../Components/header";
+import useScrollBlock from "../Components/useScrollBlock";
 
 export default function Landing({
   eventList,
@@ -27,6 +27,7 @@ export default function Landing({
   };
 
   const [showMap, setShowMap] = useState(false);
+  const [blockScroll, allowScroll] = useScrollBlock();
 
   const isSmallScreen = useMediaQuery("(max-width:500px)");
 
@@ -54,8 +55,8 @@ export default function Landing({
             position: "fixed",
             top: 0,
             left: 0,
-            width: "100%",
-            height: "100%",
+            maxWidth: "100vw",
+            maxHeight: "100vh",
           },
           position: "relative",
           display: "flex",
@@ -84,7 +85,7 @@ export default function Landing({
         <IconButton
           size="medium"
           variant="contained"
-          onClick={() => setShowMap(true)}
+          onClick={() => {blockScroll(); setShowMap(true);}}
           sx={{
             alignSelf: "right",
             right: 20,
@@ -170,7 +171,8 @@ export default function Landing({
               sx={{
                 position: "fixed",
                 top: 10,
-                right: 50,
+                right: 65,
+                color: "black",
               }}
             >
               <CloseIcon />
