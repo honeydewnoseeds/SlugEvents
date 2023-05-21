@@ -167,7 +167,10 @@ export default function Landing({
             <IconButton
               size="medium"
               variant="contained"
-              onClick={handleCloseMap}
+              onClick={() => {
+                handleCloseMap();
+                allowScroll();
+              }}              
               sx={{
                 position: "fixed",
                 top: 10,
