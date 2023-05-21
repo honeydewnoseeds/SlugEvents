@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
-import axios from 'axios';
-import MapIcon from "@mui/icons-material/MapSharp";
-import { Box, Typography, Stack, Button, IconButton } from "@mui/material";
 
 const mapStyles = {
   width: '100%',
@@ -59,12 +56,6 @@ class MapContainer extends Component {
     // Perform geocoding for markers
     this.geocodeMarker('OAKES', 'Oakes College, Santa Cruz, CA 95064');
     this.geocodeMarker('NAMASTE', 'Namaste Lounge, Santa Cruz, CA 95064');
-
-    // Trigger map resize after 600 milliseconds
-    setTimeout(() => {
-      this.map && this.map.map && this.map.map.setCenter(UCSCMID);
-      this.props.google.maps.event.trigger(this.map.map, 'resize');
-    }, 600);
   }
 
   geocodeMarker = async (markerName, locationName) => {
