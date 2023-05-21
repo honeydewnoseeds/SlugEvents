@@ -27,8 +27,8 @@ const font = createTheme({
 
 export default function ButtonAppBar() {
     return (
-      <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static" sx= {{backgroundColor:"background.default"}}>
+   
+        <AppBar elevation={0} position="static" sx= {{backgroundColor:"background.default"}}>
           <Toolbar>
             <ThemeProvider theme={font}>
                 <Typography align="left" variant="h5" color= "text.secondary" sx={{ flexGrow: 1}}>
@@ -37,6 +37,6 @@ export default function ButtonAppBar() {
             </ThemeProvider>
           </Toolbar>
         </AppBar>
-      </Box>
+      
     );
   }

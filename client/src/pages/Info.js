@@ -1,4 +1,4 @@
-import { Button, Box, CardContent, IconButton, Grid} from "@mui/material";
+import { Stack, Button, Box, CardContent, IconButton, Grid} from "@mui/material";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
@@ -7,6 +7,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import { useNavigate } from "react-router-dom";
+
 
 function Board() {
   const navigate = useNavigate()
@@ -54,7 +55,7 @@ function Board() {
         </CardContent>
       </Card>
     </Grid>
-     
+     <Stack direction= "row" spacing={15}>
         <Button variant="contained" startIcon={<CalendarMonthIcon />}>
           Calendar
         </Button>
@@ -62,6 +63,7 @@ function Board() {
         <Button variant="contained" startIcon={<NotificationsActiveIcon />}>
           Notify Me
         </Button>
+      </Stack>
   </Box>
   </>
   );

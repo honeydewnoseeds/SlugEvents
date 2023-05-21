@@ -38,7 +38,7 @@ const Event = (props) => {
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
-        width: "100%",
+        width: "85%",
         backgroundColor: color(props.account),
         borderRadius: "16px",
       }}

@@ -11,6 +11,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { useMediaQuery } from "@mui/material";
 import MapContainer from "../map";
 import useScrollBlock from "../Components/useScrollBlock";
+import Header from "../Components/header";
 
 export default function Landing({
   eventList,
@@ -44,7 +45,7 @@ export default function Landing({
         height: "100%",
       }}
     >
-      <Box
+    <Box
         height="auto"
         minHeight="150vh"
         width="auto"
@@ -114,6 +115,7 @@ export default function Landing({
         >
           <AccountIcon />
         </IconButton>
+    <Header></Header> 
         <Stack
           spacing={2}
           direction="column"
@@ -126,10 +128,6 @@ export default function Landing({
             alignItems: "center",
           }}
         >
-          <Typography variant="h2" color="text.secondary" fontWeight="normal">
-            SlugEvents
-          </Typography>
-
           <Stack direction="row" spacing={2}>
             <Filters
               resetFilter={resetFilter}
