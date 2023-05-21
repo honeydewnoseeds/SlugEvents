@@ -161,7 +161,7 @@ export default function Landing({
         <Popups trigger={buttonPopup}>
           <CreateEvent onClose={handlePopupClose}> </CreateEvent>
         </Popups>
-        {showMap && (
+        {showMap && ( 
           <>
             <MapContainer handleCloseMap={handleCloseMap} />
             <IconButton
