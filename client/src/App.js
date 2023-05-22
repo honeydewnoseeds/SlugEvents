@@ -71,7 +71,7 @@ function App() {
   }
 
   const filterCrownMerill = () => {
-    filterByAccount("ucsccrowncollege", "ucscmerillcollege");
+    filterByAccount("ucsccrowncollege", "ucscmerrillcollege");
   }
 
   // Attach the resetFilter function to the window object
