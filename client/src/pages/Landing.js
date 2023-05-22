@@ -54,7 +54,7 @@ export default function Landing({
         sx={{
           ".full-screen-map": {
             position: "fixed",
-            top: 0,
+            top: window.scrollY,
             left: 0,
             maxWidth: "100vw",
             maxHeight: "100vh",
