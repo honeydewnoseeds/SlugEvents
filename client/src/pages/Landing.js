@@ -45,7 +45,7 @@ export default function Landing({
         height: "100%",
       }}
     >
-    <Box
+    <Box 
         height="auto"
         minHeight="150vh"
         width="auto"
