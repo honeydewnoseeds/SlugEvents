@@ -20,7 +20,7 @@ def standardize_location(location):
         return location, None
 
 def standardize_date(date):
-    return parse(date).isoformat()
+    return parse(date).date().isoformat()
 
 def standardize_time(time):
     if '-' in time:
