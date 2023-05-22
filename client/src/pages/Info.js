@@ -6,11 +6,15 @@ import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 
 function Board() {
   const navigate = useNavigate()
+  const location = useLocation();
+  let imageSrc = location.state.imageSrc;
+  let description = location.state.description;
+
   return (
     <>
 <Box
@@ -38,18 +42,22 @@ function Board() {
       <Card variant="outlined" sx= {{border:"primary.main", borderRadius: '16px', width: "80vw", height: "78vh"}}>
         <CardContent>
           <Grid container direction="column" alignItems="center" justify="center">
-            <CardMedia
-              width= "auto"
-              component = "img"
-              sx={{width: "25vw"}}
-              image="https://news.ucsc.edu/2014/10/images/Slugpuppetgenome.jpg"
-            />
+          <img
+            src= {imageSrc}
+            alt= "titlee"
+            style={{
+              width: "30%",
+              height: "100%", // Set a fixed height for the images
+              objectFit: "cover",
+              borderRadius: "16px 16px 16px 16px",
+            }}
+        />
           </Grid>
           <Divider />
           <Typography variant="h5" component={'div'}>
             Events Specification: 
             <Typography variant= "h6">
-              This is an events for UCSC students
+              {description}
             </Typography>
           </ Typography>
         </CardContent>
@@ -67,6 +75,6 @@ function Board() {
   </Box>
   </>
   );
-}
+};
 
 export default Board;
