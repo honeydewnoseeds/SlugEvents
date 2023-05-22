@@ -3,6 +3,31 @@ import instaloader
 from datetime import datetime, timedelta
 import openai
 from firebase_admin import credentials, initialize_app, storage, firestore
+import googlemaps
+from dateutil.parser import parse
+
+# Initialize Google Maps client
+gmaps = googlemaps.Client(key='AIzaSyBpT3KovRtvljSVZqZo_PthMUtQcLPV0pg')
+
+def standardize_location(location):
+    geocode_result = gmaps.geocode(location)
+    if geocode_result:
+        formatted_address = geocode_result[0]['formatted_address']
+        lat = geocode_result[0]['geometry']['location']['lat']
+        lng = geocode_result[0]['geometry']['location']['lng']
+        return formatted_address, (lat, lng)
+    else:
+        return location, None
+
+def standardize_date(date):
+    return parse(date).isoformat()
+
+def standardize_time(time):
+    if '-' in time:
+        start_time, end_time = time.split('-')
+        return parse(start_time.strip()).time().isoformat(), parse(end_time.strip()).time().isoformat()
+    else:
+        return parse(time).time().isoformat(), None
 
 # Initialize Firebase Admin SDK
 cred = credentials.Certificate("slugevents-57e0b-firebase-adminsdk-brd1a-dcc2a15087.json")
@@ -14,7 +39,7 @@ initialize_app(cred, {
 L = instaloader.Instaloader()
 
 # OpenAI API Key
-openai.api_key = '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'
+openai.api_key = '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'
 
 # Instagram profiles to download images from
 profiles = [
@@ -60,7 +85,7 @@ for profile_name in profiles:
             model="gpt-3.5-turbo",
             messages=[
                 {"role": "system", "content": "You are a helpful assistant."},
-                {"role": "user", "content": f"{post.caption}\nDetermine if this instagram post description describes an event. If the description doesn't describe an event, output 'not an event'. If it does, output the location, date, and time of the event in the following format: 'location: location_placeholder, date: date_placeholder, time: time_placeholder"}
+                {"role": "user", "content": f"{post.date, post.caption}\nDetermine if this instagram post description describes an event given the description and post date. If the description doesn't contain a specified location, date and time, or is an announcement, only output 'not an event'. If it does, output the location, date, and time of the event in the following format: 'location: location_placeholder, date: date_placeholder, time: start_time_placeholder - end_time_placeholder"}
             ]
         )
 
@@ -68,19 +93,21 @@ for profile_name in profiles:
         print(response)
 
         # If the model determines it's not an event, skip this post
+        if 'not specified' in response['choices'][0]['message']['content'].lower():
+            continue
         if 'not an event' in response['choices'][0]['message']['content'].lower():
             continue
 
         # Extract location, date, and time from the response
-        location, date, time = None, None, None  # Initialize variables
+        location, date, start_time, end_time, coordinates = None, None, None, None, None  # Initialize variables
         message_parts = response['choices'][0]['message']['content'].split(', ')
         for part in message_parts:
             if 'location:' in part.lower():
-                location = part.split(': ')[1]
+                location, coordinates = standardize_location(part.split(': ')[1])
             elif 'date:' in part.lower():
-                date = part.split(': ')[1]
+                date = standardize_date(part.split(': ')[1])
             elif 'time:' in part.lower():
-                time = part.split(': ')[1]
+                start_time, end_time = standardize_time(part.split(': ')[1])
 
         # Check if the post is a sidecar (album)
         if post.typename == "GraphSidecar":
@@ -113,8 +140,10 @@ for profile_name in profiles:
             "date_posted": post.date_utc,
             "imageSrc": image_url,
             "eventLocation": location,
+            "eventCoordinates": coordinates,
             "eventDate": date,
-            "eventTime": time
+            "eventStartTime": start_time,
+            "eventEndTime": end_time
         })
 
         print(f"Processed {image_name}.jpg")
