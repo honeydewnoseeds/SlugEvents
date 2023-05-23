@@ -40,7 +40,7 @@ initialize_app(cred, {
 L = instaloader.Instaloader()
 
 # OpenAI API Key
-openai.api_key = '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'
+openai.api_key = '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'
 
 # Instagram profiles to download images from
 profiles = [
