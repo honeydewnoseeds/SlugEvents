@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
-import axios from 'axios';
-import MapIcon from "@mui/icons-material/MapSharp";
-import { Box, Typography, Stack, Button, IconButton } from "@mui/material";
+
+import CustomMarker from './CustomMarker';
+
 
 const mapStyles = {
   width: '100%',
   height: '100%'
 };
 
-const image = 'https://cdn-icons-png.flaticon.com/512/1673/1673221.png';
+const userImage = 'https://cdn-icons-png.flaticon.com/512/1673/1673221.png';
 
 const markerSize = {
   width: 40,
@@ -29,13 +29,7 @@ class MapContainer extends Component {
     },
     isInfoWindowOpen: {
       currentLocation: false,
-      OAKES: false,
-      NAMASTE: false
-    },
-    geocodedMarkers: {
-      OAKES: null,
-      NAMASTE: null
-    },
+    }
   };
 
   // Gets user location right when map is created
@@ -45,7 +39,7 @@ class MapContainer extends Component {
       this.watchId = navigator.geolocation.watchPosition(
         position => {
           // Update the userLocation state with the new coordinates
-          const { latitude, longitude } = position.coords;
+          const {latitude, longitude} = position.coords;
           this.setState({
             userLocation: { lat: latitude, lng: longitude }
           });
@@ -56,27 +50,25 @@ class MapContainer extends Component {
       );
     }
 
-    // Perform geocoding for markers
-    this.geocodeMarker('OAKES', 'Oakes College, Santa Cruz, CA 95064');
-    this.geocodeMarker('NAMASTE', 'Namaste Lounge, Santa Cruz, CA 95064');
-
-    // Trigger map resize after 600 milliseconds
-    setTimeout(() => {
-      this.map && this.map.map && this.map.map.setCenter(UCSCMID);
-      this.props.google.maps.event.trigger(this.map.map, 'resize');
-    }, 600);
   }
 
-  geocodeMarker = async (markerName, locationName) => {
-    // Geocoding logic...
-  };
-
   handleMarkerClick = markerName => {
-    // Marker click handler...
+    this.setState(prevState => ({
+      isInfoWindowOpen: {
+        ...prevState.isInfoWindowOpen,
+        [markerName]: true
+      }
+    }));
   };
 
+  // Handle closing markers
   handleInfoWindowClose = markerName => {
-    // InfoWindow close handler...
+    this.setState(prevState => ({
+      isInfoWindowOpen: {
+        ...prevState.isInfoWindowOpen,
+        [markerName]: false
+      }
+    }));
   };
 
   componentWillUnmount() {
@@ -86,14 +78,15 @@ class MapContainer extends Component {
   }
 
   render() {
-    const { userLocation, isInfoWindowOpen, geocodedMarkers } = this.state;
+
+    const {userLocation, isInfoWindowOpen} = this.state;
 
     if (!userLocation.lat || !userLocation.lng) {
       return <div>Loading...</div>;
     }
 
     const markerImageStyle = {
-      url: image,
+      url: userImage,
       scaledSize: new this.props.google.maps.Size(
         markerSize.width,
         markerSize.height
@@ -127,41 +120,12 @@ class MapContainer extends Component {
           </div>
         </InfoWindow>
 
-        {geocodedMarkers.OAKES && (
-          <Marker
-            position={geocodedMarkers.OAKES}
-            title={'OAKES'}
-            onClick={() => this.handleMarkerClick('OAKES')}
-          />
-        )}
-        <InfoWindow
-          position={geocodedMarkers.OAKES}
-          visible={isInfoWindowOpen.OAKES}
-          onClose={() => this.handleInfoWindowClose('OAKES')}
-        >
-          <div>
-            <h3>OAKES</h3>
-            <p>Details here :)</p>
-          </div>
-        </InfoWindow>
-
-        {geocodedMarkers.NAMASTE && (
-          <Marker
-            position={geocodedMarkers.NAMASTE}
-            title={'NAMASTE'}
-            onClick={() => this.handleMarkerClick('NAMASTE')}
-          />
-        )}
-        <InfoWindow
-          position={geocodedMarkers.NAMASTE}
-          visible={isInfoWindowOpen.NAMASTE}
-          onClose={() => this.handleInfoWindowClose('NAMASTE')}
-        >
-          <div>
-            <h3>NAMASTE</h3>
-            <p>Details here :)</p>
-          </div>
-        </InfoWindow>
+        <CustomMarker
+          google={this.props.google}
+          map={this.props.map}
+          locationName="Mchenry Library"
+          description="This is Kresge College"
+        />
       </Map>
     );
   }
