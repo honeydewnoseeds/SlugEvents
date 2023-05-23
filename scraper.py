@@ -5,6 +5,7 @@ import openai
 from firebase_admin import credentials, initialize_app, storage, firestore
 import googlemaps
 from dateutil.parser import parse
+from google.cloud.firestore import Query
 
 # Initialize Google Maps client
 gmaps = googlemaps.Client(key='AIzaSyBpT3KovRtvljSVZqZo_PthMUtQcLPV0pg')
@@ -89,9 +90,6 @@ for profile_name in profiles:
             ]
         )
 
-        print(post.caption)
-        print(response)
-
         # If the model determines it's not an event, skip this post
         if 'not specified' in response['choices'][0]['message']['content'].lower():
             continue
@@ -108,6 +106,15 @@ for profile_name in profiles:
                 date = standardize_date(part.split(': ')[1])
             elif 'time:' in part.lower():
                 start_time, end_time = standardize_time(part.split(': ')[1])
+        
+        # Query Firestore to check for existing event with same details
+        query = db.collection('events').where('eventLocation', '==', location).where('eventDate', '==', date).where('eventStartTime', '==', start_time)
+        existing_events = query.stream()
+
+        # If an event with the same details exists, skip this post
+        for _ in existing_events:
+            print(f"Skipping duplicate event: {post_id}")
+            continue
 
         # Check if the post is a sidecar (album)
         if post.typename == "GraphSidecar":
