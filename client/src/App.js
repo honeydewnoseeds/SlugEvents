@@ -5,6 +5,7 @@ import { getDocs, collection } from "firebase/firestore";
 import { addDoc } from "firebase/firestore";
 import Landing from "./pages/Landing";
 import Info from "./pages/Info";
+import Map from "./pages/Map";
 import { ThemeProvider } from "@mui/material";
 import { themeOptions } from "./Components/theme";
 import { deleteDoc, doc, writeBatch } from "firebase/firestore";
@@ -134,6 +135,7 @@ const addEvent = async (event = {
             filterRccOakes={filterRccOakes}
             filterCrownMerill={filterCrownMerill}/>} />
           <Route path="/info" element={<Info />} />
+          <Route path="/map" element={<Map />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
