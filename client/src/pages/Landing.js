@@ -74,7 +74,7 @@ export default function Landing({
           <AddRoundedIcon />
         </IconButton>
 
-        <IconButton
+        <IconButton 
   size="medium"
   variant="contained"
   onClick={() => navigate("/map")}
