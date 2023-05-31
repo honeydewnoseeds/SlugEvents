@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Typography, Stack, Button, IconButton } from "@mui/material";
+import { Box, Stack, IconButton } from "@mui/material";
 import Event from "../Components/EventCard";
 import Filters from "../Components/filters";
 import CreateEvent from "../Components/CreateEvent";
@@ -7,14 +7,9 @@ import Popups from "../Components/popups";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import MapIcon from "@mui/icons-material/MapSharp";
 import AccountIcon from "@mui/icons-material/AccountBox";
-import CloseIcon from "@mui/icons-material/Close";
 import { useMediaQuery } from "@mui/material";
-import MapContainer from "../map";
-import useScrollBlock from "../Components/useScrollBlock";
 import Header from "../Components/header";
 import { useNavigate } from "react-router-dom";
-import Maps from "../pages/Map";
-
 
 export default function Landing({
   eventList,
@@ -33,7 +28,6 @@ export default function Landing({
   const isSmallScreen = useMediaQuery("(max-width:500px)");
 
   const navigate = useNavigate();
-
 
   return (
     <div
@@ -74,23 +68,22 @@ export default function Landing({
           <AddRoundedIcon />
         </IconButton>
 
-        <IconButton 
-  size="medium"
-  variant="contained"
-  onClick={() => navigate("/map")}
-  sx={{
-    alignSelf: "flex-end",
-    position: "fixed",
-    bottom: 80,
-    right: 20,
-    backgroundColor: "#F7AF9D",
-    width: isSmallScreen ? "90px" : "60px",
-    height: isSmallScreen ? "90px" : "60px",
-  }}
->
-  <MapIcon />
-</IconButton>
-
+        <IconButton
+          size="medium"
+          variant="contained"
+          onClick={() => navigate("/map")}
+          sx={{
+            alignSelf: "flex-end",
+            position: "fixed",
+            bottom: 80,
+            right: 20,
+            backgroundColor: "#F7AF9D",
+            width: isSmallScreen ? "90px" : "60px",
+            height: isSmallScreen ? "90px" : "60px",
+          }}
+        >
+          <MapIcon />
+        </IconButton>
 
         <IconButton
           size="medium"
@@ -109,7 +102,7 @@ export default function Landing({
         </IconButton>
 
         <Header />
-        
+
         <Stack
           spacing={2}
           direction="column"
@@ -150,7 +143,7 @@ export default function Landing({
             ))}
           </Stack>
         </Stack>
-        
+
         <Popups trigger={buttonPopup}>
           <CreateEvent onClose={handlePopupClose} />
         </Popups>

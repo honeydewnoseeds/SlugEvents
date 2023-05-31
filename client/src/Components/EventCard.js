@@ -15,7 +15,7 @@ const Event = (props) => {
       return "#EA9AB2";
     } else if (
       props.account === "porter.college" ||
-      props.college === "kc_ucsc"
+      props.account === "kc_ucsc"
     ) {
       return "#EFCFE3";
     } else if (
