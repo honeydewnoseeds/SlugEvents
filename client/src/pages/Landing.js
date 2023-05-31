@@ -1,16 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import {
-  Box,
-  Typography,
-  Stack,
-  Button,
-  IconButton,
-  // Card,
-  // CardContent,
-  // CardHeader,
-  // useThemeProps,
-} from "@mui/material";
+import { Box, Stack, IconButton } from "@mui/material";
 import Event from "../Components/EventCard";
 import Filters from "../Components/filters";
 import CreateEvent from "../Components/CreateEvent";
@@ -18,11 +8,9 @@ import Popups from "../Components/popups";
 import Header from "../Components/header";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import { useMediaQuery } from "@mui/material";
-import MapContainer from "../map";
-import useScrollBlock from "../Components/useScrollBlock";
-import Header from "../Components/header";
 import { useNavigate } from "react-router-dom";
-import Maps from "../pages/Map";
+import MapIcon from "@mui/icons-material/Map";
+import AccountIcon from "@mui/icons-material/AccountCircle";
 
 export default function Landing({
   eventList,
@@ -128,27 +116,6 @@ export default function Landing({
             alignItems: "center",
           }}
         >
-          <IconButton
-            size="large"
-            variant="contained"
-            onClick={() => setButtonPopup(true)}
-            sx={{
-              alignSelf: "right",
-              right: 50,
-              bottom: 50,
-              position: "fixed",
-              backgroundColor: "#F7AF9D",
-              width: isSmallScreen ? "90px" : "60px",
-              height: isSmallScreen ? "90px" : "60px",
-            }}
-          >
-            <AddRoundedIcon
-              sx={{
-                frontSize: isSmallScreen ? "100px" : "50px",
-              }}
-            />
-          </IconButton>
-
           <Stack direction="row" spacing={2}>
             <Filters
               resetFilter={resetFilter}
