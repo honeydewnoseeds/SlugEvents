@@ -8,9 +8,9 @@ import Popups from "../Components/popups";
 import Header from "../Components/header";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import { useMediaQuery } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import MapIcon from "@mui/icons-material/Map";
-import AccountIcon from "@mui/icons-material/AccountCircle";
+import MapContainer from "../map";
+import useScrollBlock from "../Components/useScrollBlock";
+import Header from "../Components/header";
 
 export default function Landing({
   eventList,
@@ -26,9 +26,14 @@ export default function Landing({
     setButtonPopup(false);
   };
 
+  const [showMap, setShowMap] = useState(false);
+  const [blockScroll, allowScroll] = useScrollBlock();
+
   const isSmallScreen = useMediaQuery("(max-width:500px)");
 
-  const navigate = useNavigate();
+  const handleCloseMap = () => {
+    setShowMap(false);
+  };
 
   return (
     <div
@@ -43,8 +48,16 @@ export default function Landing({
         height="auto"
         minHeight="150vh"
         width="auto"
+        //auto fit constraints
         flexGrow={1}
         sx={{
+          ".full-screen-map": {
+            position: "fixed",
+            top: window.scrollY,
+            left: 0,
+            maxWidth: "100vw",
+            maxHeight: "100vh",
+          },
           position: "relative",
           display: "flex",
           flexDirection: "column",
@@ -57,10 +70,10 @@ export default function Landing({
           variant="contained"
           onClick={() => setButtonPopup(true)}
           sx={{
-            alignSelf: "flex-end",
-            position: "fixed",
-            bottom: 10,
+            alignSelf: "right",
             right: 20,
+            bottom: 10,
+            position: "fixed",
             backgroundColor: "#F7AF9D",
             width: isSmallScreen ? "90px" : "60px",
             height: isSmallScreen ? "90px" : "60px",
@@ -72,12 +85,15 @@ export default function Landing({
         <IconButton
           size="medium"
           variant="contained"
-          onClick={() => navigate("/map")}
+          onClick={() => {
+            blockScroll();
+            setShowMap(true);
+          }}
           sx={{
-            alignSelf: "flex-end",
-            position: "fixed",
-            bottom: 80,
+            alignSelf: "right",
             right: 20,
+            bottom: 80,
+            position: "fixed",
             backgroundColor: "#F7AF9D",
             width: isSmallScreen ? "90px" : "60px",
             height: isSmallScreen ? "90px" : "60px",
@@ -90,10 +106,10 @@ export default function Landing({
           size="medium"
           variant="contained"
           sx={{
-            alignSelf: "flex-end",
-            position: "fixed",
-            bottom: 150,
+            alignSelf: "right",
             right: 20,
+            bottom: 150,
+            position: "fixed",
             backgroundColor: "#F7AF9D",
             width: isSmallScreen ? "90px" : "60px",
             height: isSmallScreen ? "90px" : "60px",
@@ -101,9 +117,7 @@ export default function Landing({
         >
           <AccountIcon />
         </IconButton>
-
-        <Header />
-
+        <Header></Header>
         <Stack
           spacing={2}
           direction="column"
@@ -144,10 +158,30 @@ export default function Landing({
             ))}
           </Stack>
         </Stack>
-
         <Popups trigger={buttonPopup}>
-          <CreateEvent onClose={handlePopupClose} />
+          <CreateEvent onClose={handlePopupClose}> </CreateEvent>
         </Popups>
+        {showMap && (
+          <>
+            <MapContainer handleCloseMap={handleCloseMap} />
+            <IconButton
+              size="medium"
+              variant="contained"
+              onClick={() => {
+                handleCloseMap();
+                allowScroll();
+              }}
+              sx={{
+                position: "fixed",
+                top: 10,
+                right: 65,
+                color: "black",
+              }}
+            >
+              <CloseIcon />
+            </IconButton>
+          </>
+        )}
       </Box>
     </div>
   );
