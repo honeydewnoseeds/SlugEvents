@@ -15,7 +15,7 @@ const Event = (props) => {
       return "#EA9AB2";
     } else if (
       props.account === "porter.college" ||
-      props.college === "kc_ucsc"
+      props.account === "kc_ucsc"
     ) {
       return "#EFCFE3";
     } else if (
@@ -42,7 +42,10 @@ const Event = (props) => {
         backgroundColor: color(props.account),
         borderRadius: "16px",
       }}
-      onClick={() => navigate("/info")}
+      onClick={() => navigate("/info",{state: {
+        imageSrc: props.imageSrc,
+        description: props.description,
+      }})}
     >
       <img
         src={props.imageSrc}
