@@ -4,7 +4,9 @@ import {useEffect} from 'react';
 // Function which exports a Marker given a, Event Name, Location Name and Time
 // Uses google and map from map.js so they don't have to be imported into this file
 ////
+
 const CustomMarker = ({google, map, eventName, locationName, time}) => {
+
   useEffect(() => {
     // Geocoder imported from the google maps api
     const geocoder = new google.maps.Geocoder();

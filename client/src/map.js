@@ -53,7 +53,7 @@ class MapContainer extends Component {
           const {latitude, longitude} = position.coords;
           // Update userLocation state with new coords
           this.setState({
-            userLocation: { lat: latitude, lng: longitude }
+            userLocation: {lat: latitude, lng: longitude}
           });
         },
         // Error callback function
@@ -108,7 +108,7 @@ class MapContainer extends Component {
     // If User's Location isn't given then return message
     if (!userLocation.lat || !userLocation.lng) {
       return (
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+        <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh'}}>
           <h2>Share Location to View Map</h2>
         </div>
       );
