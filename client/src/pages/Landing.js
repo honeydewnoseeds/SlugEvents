@@ -54,23 +54,6 @@ export default function Landing({
         <IconButton
           size="medium"
           variant="contained"
-          onClick={() => setButtonPopup(true)}
-          sx={{
-            alignSelf: "flex-end",
-            position: "fixed",
-            bottom: 10,
-            right: 20,
-            backgroundColor: "#F7AF9D",
-            width: isSmallScreen ? "90px" : "60px",
-            height: isSmallScreen ? "90px" : "60px",
-          }}
-        >
-          <AddRoundedIcon />
-        </IconButton>
-
-        <IconButton
-          size="medium"
-          variant="contained"
           onClick={() => navigate("/map")}
           sx={{
             alignSelf: "flex-end",
@@ -83,22 +66,6 @@ export default function Landing({
           }}
         >
           <MapIcon />
-        </IconButton>
-
-        <IconButton
-          size="medium"
-          variant="contained"
-          sx={{
-            alignSelf: "flex-end",
-            position: "fixed",
-            bottom: 150,
-            right: 20,
-            backgroundColor: "#F7AF9D",
-            width: isSmallScreen ? "90px" : "60px",
-            height: isSmallScreen ? "90px" : "60px",
-          }}
-        >
-          <AccountIcon />
         </IconButton>
 
         <Header />
