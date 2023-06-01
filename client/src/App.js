@@ -17,18 +17,16 @@ function App() {
   const eventsCollectionRef = collection(db, "events");
 
   useEffect(() => {
-    const unsubscribe = onSnapshot(eventsCollectionRef, (snapshot) => {
-      const updatedData = snapshot.docs.map((doc) => ({
+    const fetchEvents = async () => {
+      const querySnapshot = await getDocs(eventsCollectionRef);
+      const updatedData = querySnapshot.docs.map((doc) => ({
         ...doc.data(),
         id: doc.id,
       }));
       setEventList(updatedData);
-    });
-  
-    // Clean up the listener when the component unmounts
-    return () => {
-      unsubscribe();
     };
+  
+    fetchEvents();
   }, []);
 
   // Define a function to filter events by the "account" field
