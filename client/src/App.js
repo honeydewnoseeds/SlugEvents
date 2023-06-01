@@ -19,18 +19,15 @@ function App() {
 
   useEffect(() => {
     const unsubscribe = onSnapshot(eventsCollectionRef, (snapshot) => {
-      const updatedData = snapshot.docs.map((doc) => ({
-        ...doc.data(),
-        id: doc.id,
-      }));
+      const updatedData = snapshot.docs.map((doc) => ({...doc.data(), id: doc.id, }));
       setEventList(updatedData);
     });
-
+  
     // Clean up the listener when the component unmounts
     return () => {
       unsubscribe();
     };
-  });
+  }, []); // Add empty dependency array  
 
   // Define a function to filter events by the "account" field
   const filterByAccount = (accountToFilter1, accountToFilter2) => {
