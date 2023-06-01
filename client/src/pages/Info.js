@@ -1,4 +1,4 @@
-import { Stack, Button, Box, CardContent, IconButton, Grid} from "@mui/material";
+import { Stack, Button, Box, CardContent, IconButton, Grid, CardMedia, useMediaQuery} from "@mui/material";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
@@ -8,7 +8,6 @@ import { useTheme } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import MobileStepper from '@mui/material/MobileStepper';
 import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
 import { useLocation, useNavigate } from "react-router-dom";
 import * as React from 'react';
 
@@ -29,38 +28,51 @@ function Board() {
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
   const maxSteps = 2;
+  const isSmallScreen = useMediaQuery("(max-width:1000px)");
 
   const slider = (current) => {
     if (current===0){
-      return (    
-      <Grid container direction="column" alignItems="center" justify="center">
-              <img
+      return (   
+        <CardMedia>
+          <img class="vertical-center"
                 src= {imageSrc}
                 alt= "titlee"
                 style={{
-                  width: "70vw",
-                  height: "73vh", // Set a fixed height for the images
-                  objectFit: "cover",
-                  borderRadius: "16px 16px 16px 16px",
+                  width: isSmallScreen ? "90%" : "50%",
+                  maxHeight: "74vh", // Set a fixed height for the images
+                  objectFit: "contain",
+                  borderRadius: "16px, 16px, 16px, 16px",
                 }}
-            />
-              </Grid>
-              
+          />
+          </CardMedia>
       );          
     }else{
         return( 
-          <Typography variant= "h6">
+          <CardMedia>
+            <Typography variant= "h6">
               {description}
-          </Typography>
+            </Typography>
+          </CardMedia>
+
         );    
     }
   }
 
   return (
-    <>
+
+    <div
+    style={{
+      display: "flex",
+      alignItems: "center",
+      textAlign: "center",
+      height: "100%",
+    }}
+  >
+
 <Box
-      height="100vh"
-      width="100vw"
+      minHeight="100vh"
+      width="auto"
+      height="auto"
    
       //auto fit constraints
       flexGrow={1}
@@ -79,13 +91,17 @@ function Board() {
       </ IconButton>
     </Grid>
 
-    <Grid container direction="column" alignItems="center" justify="center">
-    <Card variant="outlined" sx= {{border:"primary.main", borderRadius: '16px', width: "80vw", height: "78vh"}}>
-      <CardContent>
-        {slider(activeStep)}
-      </CardContent>
-      </Card>
-    </Grid>
+    <Card variant="outlined" sx= {{border:"primary.main", 
+                                   borderRadius: '16px',
+                                   width: "80vw",
+                                   height: "78vh",
+                                   display: isSmallScreen ? "flex" : "",
+                                   alignItems: "center",
+                                   justifyContent: "center",
+                                   p: 2 }}>
+          {slider(activeStep)}
+        </Card>
+  
   
     <MobileStepper
         steps={maxSteps}
@@ -117,17 +133,13 @@ function Board() {
         }
       />
 
-     <Stack direction= "row" spacing={15}>
+     <Stack>
         <Button variant="contained" startIcon={<CalendarMonthIcon />}>
           Calendar
         </Button>
-        
-        <Button variant="contained" startIcon={<NotificationsActiveIcon />}>
-          Notify Me
-        </Button>
       </Stack>
   </Box>
-  </>
+  </div>
   );
 };
 
