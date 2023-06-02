@@ -34,6 +34,7 @@ const Event = (props) => {
 
   return (
     <Card
+      data-testid="event-card"
       sx={{
         display: "flex",
         flexDirection: "row",

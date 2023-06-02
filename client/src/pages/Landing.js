@@ -10,7 +10,9 @@ import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import { useMediaQuery } from "@mui/material";
 import MapContainer from "../map";
 import useScrollBlock from "../Components/useScrollBlock";
-import Header from "../Components/header";
+import MapIcon from "@mui/icons-material/Map";
+import AccountIcon from "@mui/icons-material/AccountCircle";
+import CloseIcon from "@mui/icons-material/Close";
 
 export default function Landing({
   eventList,
