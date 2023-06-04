@@ -8,7 +8,7 @@ import Popups from "../Components/popups";
 import Header from "../Components/header";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import { useMediaQuery } from "@mui/material";
-import MapContainer from "../map";
+import MapContainer from "./map";
 import useScrollBlock from "../Components/useScrollBlock";
 import MapIcon from "@mui/icons-material/Map";
 import AccountIcon from "@mui/icons-material/AccountCircle";

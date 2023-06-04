@@ -4,5 +4,9 @@
     "instagram-scraper": "^1.0.6",
     "instagram-web-api": "^2.2.2",
     "scraper-instagram": "^1.0.17"
+  },
+  "devDependencies": {
+    "@testing-library/react": "^14.0.0",
+    "react-test-renderer": "^18.2.0"
   }
 }

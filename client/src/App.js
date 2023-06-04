@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import "./App.css";
 import { db } from "./config/firebase";
 import { getDocs, collection } from "firebase/firestore";
 import { addDoc } from "firebase/firestore";
@@ -40,16 +39,6 @@ function App() {
     setFilteredEventList(filteredEvents);
   };
 
-  /*
-  // Attach the filterByAccount function to the window object
-  useEffect(() => {
-    window.filterByAccount = filterByAccount;
-    return () => {
-      // Clean up the function from the window object when the component is unmounted
-      delete window.filterByAccount;
-    };
-  }, [eventList]);
-  */
   const resetFilter = () => {
     setFilteredEventList(null);
   };
