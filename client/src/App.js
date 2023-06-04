@@ -27,7 +27,7 @@ function App() {
     return () => {
       unsubscribe();
     };
-  }, []); // Add empty dependency array  
+  },); // Add empty dependency array  
 
   // Define a function to filter events by the "account" field
   const filterByAccount = (accountToFilter1, accountToFilter2) => {

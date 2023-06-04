@@ -1,12 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { Box, Stack, IconButton } from "@mui/material";
 import Event from "../Components/EventCard";
 import Filters from "../Components/filters";
-import CreateEvent from "../Components/CreateEvent";
-import Popups from "../Components/popups";
-import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import MapIcon from "@mui/icons-material/MapSharp";
-import AccountIcon from "@mui/icons-material/AccountBox";
 import { useMediaQuery } from "@mui/material";
 import Header from "../Components/header";
 import { useNavigate } from "react-router-dom"; 
@@ -20,10 +16,6 @@ export default function Landing({
   filterRccOakes,
   filterCrownMerill,
 }) {
-  const [buttonPopup, setButtonPopup] = useState(false);
-  const handlePopupClose = () => {
-    setButtonPopup(false);
-  };
 
   const isSmallScreen = useMediaQuery("(max-width:500px)");
 
@@ -110,10 +102,6 @@ export default function Landing({
             ))}
           </Stack>
         </Stack>
-
-        <Popups trigger={buttonPopup}>
-          <CreateEvent onClose={handlePopupClose} />
-        </Popups>
       </Box>
     </div>
   );
