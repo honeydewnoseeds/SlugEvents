@@ -38,7 +38,7 @@ function Filters({
       <Button
         variant="contained"
         onClick={filterC9C10}
-        sx={{ backgroundColor: "#E27396", color: "#000000"}}
+        sx={{ backgroundColor: "#E27396", color: "#000000", fontWeight: "normal"}}
         style={buttonStyle}
       >
         College 9/10
