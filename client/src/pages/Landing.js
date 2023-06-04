@@ -9,7 +9,7 @@ import MapIcon from "@mui/icons-material/MapSharp";
 import AccountIcon from "@mui/icons-material/AccountBox";
 import { useMediaQuery } from "@mui/material";
 import Header from "../Components/header";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"; 
 
 export default function Landing({
   eventList,
