@@ -34,6 +34,7 @@ const Event = (props) => {
 
   return (
     <Card
+    data-testid="event-card"
       sx={{
         display: "flex",
         flexDirection: "row",
@@ -42,10 +43,7 @@ const Event = (props) => {
         backgroundColor: color(props.account),
         borderRadius: "16px",
       }}
-      onClick={() => navigate("/info",{state: {
-        imageSrc: props.imageSrc,
-        description: props.description,
-      }})}
+      onClick={() => navigate("/info")}
     >
       <img
         src={props.imageSrc}

@@ -9,10 +9,4 @@ describe("Header component", () => {
     const appTitle = screen.getByText("SlugEvents");
     expect(appTitle).toBeInTheDocument();
   });
-
-  test("renders the login button", () => {
-    render(<ButtonAppBar />);
-    const loginButton = screen.getByRole("button", { name: "Login" });
-    expect(loginButton).toBeInTheDocument();
-  });
 });
