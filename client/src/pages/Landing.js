@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { Box, Stack, IconButton } from "@mui/material";
 import Event from "../Components/EventCard";
 import Filters from "../Components/filters";
+import SignUp from "../Components/SignUp";
+import Login from "../Components/Login";
+import UserDetails from "../Components/userDetails";
 import CreateEvent from "../Components/CreateEvent";
 import Popups from "../Components/popups";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
@@ -54,6 +57,23 @@ export default function Landing({
         <IconButton
           size="medium"
           variant="contained"
+          onClick={() => setButtonPopup(true)}
+          sx={{
+            alignSelf: "flex-end",
+            position: "fixed",
+            bottom: 10,
+            right: 20,
+            backgroundColor: "#F7AF9D",
+            width: isSmallScreen ? "90px" : "60px",
+            height: isSmallScreen ? "90px" : "60px",
+          }}
+        >
+          <AddRoundedIcon />
+        </IconButton>
+
+        <IconButton
+          size="medium"
+          variant="contained"
           onClick={() => navigate("/map")}
           sx={{
             alignSelf: "flex-end",
@@ -66,6 +86,22 @@ export default function Landing({
           }}
         >
           <MapIcon />
+        </IconButton>
+        <IconButton
+          size="medium"
+          variant="contained"
+          onClick={() => navigate("/login")}
+          sx={{
+            alignSelf: "flex-end",
+            position: "fixed",
+            bottom: 150,
+            right: 20,
+            backgroundColor: "#F7AF9D",
+            width: isSmallScreen ? "90px" : "60px",
+            height: isSmallScreen ? "90px" : "60px",
+          }}
+        >
+          <AccountIcon />
         </IconButton>
 
         <Header />

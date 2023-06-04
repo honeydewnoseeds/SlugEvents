@@ -6,6 +6,10 @@ import { addDoc } from "firebase/firestore";
 import Landing from "./pages/Landing";
 import Info from "./pages/Info";
 import Map from "./pages/Map";
+import SignUpPage from "./pages/SignUpPage";
+import SignUp from "./Components/SignUp";
+import Login from "./Components/Login";
+import UserDetails from "./Components/userDetails";
 import { ThemeProvider } from "@mui/material";
 import { themeOptions } from "./Components/theme";
 import { doc, writeBatch } from "firebase/firestore";
@@ -13,6 +17,11 @@ import { onSnapshot } from "firebase/firestore";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 
 function App() {
+
+  const isLoggedIn = window.localStorage.getItem("loggedIn"); // Login variable
+  // inside of our route we can implement like this:
+  // <Route path="/userdetails" element={ isLoggedIn == "true"? <UserDetails />: <Login/>} />
+
   const [eventList, setEventList] = useState([]);
   const [filteredEventList, setFilteredEventList] = useState(null);
   const eventsCollectionRef = collection(db, "events");
@@ -149,6 +158,10 @@ function App() {
           />
           <Route path="/info" element={<Info />} />
           <Route path="/map" element={<Map />} />
+          {/* <Route path="/signuppage" element={<SignUpPage />} /> */}
+          <Route path="/signup" element={ isLoggedIn == "true" ? <UserDetails /> : <SignUp/>}/>
+          <Route path="/login" element={<Login />} />
+          <Route path="/userdetails" element={<UserDetails />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
