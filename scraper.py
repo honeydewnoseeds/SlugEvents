@@ -1,6 +1,7 @@
 import os
 import instaloader
-from datetime import datetime
+from datetime import datetime, timedelta
+import openai
 from firebase_admin import credentials, initialize_app, storage, firestore
 
 # Initialize Firebase Admin SDK
@@ -12,6 +13,9 @@ initialize_app(cred, {
 # Initialize Instaloader
 L = instaloader.Instaloader()
 
+# OpenAI API Key
+openai.api_key = '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'
+
 # Instagram profiles to download images from
 profiles = [
     "ucsc9_jrl",
@@ -22,7 +26,7 @@ profiles = [
     "rcc_ucsc",
     "oakescollege",
     "ucsccrowncollege",
-    "ucscmerillcollege"
+    "ucscmerrillcollege"
 ]
 
 # Firebase Storage and Firestore clients
@@ -33,10 +37,16 @@ db = firestore.client()
 os.makedirs("instagram_images", exist_ok=True)
 
 # Download and process Instagram images
+one_week_ago = datetime.now() - timedelta(weeks=1)
 for profile_name in profiles:
     profile = instaloader.Profile.from_username(L.context, profile_name)
 
     for post in profile.get_posts():
+        post_date = post.date_utc.replace(tzinfo=None)  # Remove timezone info
+
+        if post_date < one_week_ago:
+            continue  # Skip posts older than a week
+
         post_id = post.shortcode  # Use the post's shortcode as a unique identifier
 
         # Check if the post already exists in the Firestore database
@@ -44,6 +54,33 @@ for profile_name in profiles:
         if existing_post.exists:
             print(f"Skipping duplicate post: {post_id}")
             continue
+
+        # Determine if the post describes an event
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "system", "content": "You are a helpful assistant."},
+                {"role": "user", "content": f"{post.caption}\nDetermine if this instagram post description describes an event. If the description doesn't describe an event, output 'not an event'. If it does, output the location, date, and time of the event in the following format: 'location: location_placeholder, date: date_placeholder, time: time_placeholder"}
+            ]
+        )
+
+        print(post.caption)
+        print(response)
+
+        # If the model determines it's not an event, skip this post
+        if 'not an event' in response['choices'][0]['message']['content'].lower():
+            continue
+
+        # Extract location, date, and time from the response
+        location, date, time = None, None, None  # Initialize variables
+        message_parts = response['choices'][0]['message']['content'].split(', ')
+        for part in message_parts:
+            if 'location:' in part.lower():
+                location = part.split(': ')[1]
+            elif 'date:' in part.lower():
+                date = part.split(': ')[1]
+            elif 'time:' in part.lower():
+                time = part.split(': ')[1]
 
         # Check if the post is a sidecar (album)
         if post.typename == "GraphSidecar":
@@ -67,14 +104,17 @@ for profile_name in profiles:
 
         # Get image URL from Firebase Storage
         image_url = blob.public_url
-        
+
         # Store image metadata in Firestore
         doc_ref = db.collection("events").document(post_id)
         doc_ref.set({
             "account": profile_name,
             "description": post.caption,
             "date_posted": post.date_utc,
-            "imageSrc": image_url
+            "imageSrc": image_url,
+            "eventLocation": location,
+            "eventDate": date,
+            "eventTime": time
         })
 
         print(f"Processed {image_name}.jpg")

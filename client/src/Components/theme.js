@@ -16,6 +16,8 @@ export const themeOptions = createTheme({
     text: {
       primary: "#000000",
       secondary: "#c08497",
+      white: "#ffffff",
     },
   },
+
 });

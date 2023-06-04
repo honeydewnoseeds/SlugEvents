@@ -15,7 +15,7 @@ const Event = (props) => {
       return "#EA9AB2";
     } else if (
       props.account === "porter.college" ||
-      props.college === "kc_ucsc"
+      props.account === "kc_ucsc"
     ) {
       return "#EFCFE3";
     } else if (
@@ -38,7 +38,7 @@ const Event = (props) => {
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
-        width: "100%",
+        width: "85%",
         backgroundColor: color(props.account),
         borderRadius: "16px",
       }}

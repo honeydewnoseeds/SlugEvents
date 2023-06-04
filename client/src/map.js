@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {Map, GoogleApiWrapper, Marker, InfoWindow} from 'google-maps-react';
 import {collection, getDocs} from 'firebase/firestore';
 
@@ -38,40 +38,43 @@ class MapContainer extends Component {
       currentLocation: false
     },
     // Array to store Custom Markers
-    markers: [] 
+    markers: []
   };
 
-  // Called when Map is rendered
-  componentDidMount() {
-    // Check if Geolocation is available in User's browser
-    if (navigator.geolocation) {
-      // Watches the User's position
-      this.watchId = navigator.geolocation.watchPosition(
-        // Success callback function for when User's position is found
-        position => {
-          // Extract latitude and longitude from User's position
-          const {latitude, longitude} = position.coords;
-          // Update userLocation state with new coords
-          this.setState({
-            userLocation: {lat: latitude, lng: longitude}
-          });
-        },
-        // Error callback function
-        error => console.log(error),
-        {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
-      );
+  constructor(props) {
+    super(props);
+    this.fetchMarkersFromDatabase();
+  }
+
+  fetchMarkersFromDatabase = () => {
+    if (this.state.markers.length > 0) {
+      return;
     }
-    // Get data from Firestare and add markers to state
+
     getDocs(collection(db, 'events'))
       .then(querySnapshot => {
-        // Extract data from querySnapshot and make an array of markers
         const markers = querySnapshot.docs.map(doc => doc.data());
-        // Update the markers state with the data from markers array
-        this.setState({markers});
+        this.setState({ markers });
       })
       .catch(error => {
         console.log('Error getting events:', error);
       });
+  };
+
+  // Called when Map is rendered and tracks user location
+  componentDidMount() {
+    if (navigator.geolocation) {
+      this.watchId = navigator.geolocation.watchPosition(
+        position => {
+          const {latitude, longitude} = position.coords;
+          this.setState({
+            userLocation: {lat: latitude, lng: longitude}
+          });
+        },
+        error => console.log(error),
+        {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
+      );
+    }
   }
 
   // Update the isInfoWindowOpen state to open markerName info window
@@ -118,7 +121,7 @@ class MapContainer extends Component {
     const markerImageStyle = {
       url: userImage,
       scaledSize: new this.props.google.maps.Size(markerSize.width, markerSize.height),
-      opacity: 0.8
+      //opacity: 0.8
     };
 
     return (

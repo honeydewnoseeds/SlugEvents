@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Typography, Stack, Button, IconButton } from "@mui/material";
+import { Box, Stack, IconButton } from "@mui/material";
 import Event from "../Components/EventCard";
 import Filters from "../Components/filters";
 import CreateEvent from "../Components/CreateEvent";
@@ -7,10 +7,9 @@ import Popups from "../Components/popups";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import MapIcon from "@mui/icons-material/MapSharp";
 import AccountIcon from "@mui/icons-material/AccountBox";
-import CloseIcon from "@mui/icons-material/Close";
 import { useMediaQuery } from "@mui/material";
-import MapContainer from "../map";
-import useScrollBlock from "../Components/useScrollBlock";
+import Header from "../Components/header";
+import { useNavigate } from "react-router-dom";
 
 export default function Landing({
   eventList,
@@ -26,14 +25,9 @@ export default function Landing({
     setButtonPopup(false);
   };
 
-  const [showMap, setShowMap] = useState(false);
-  const [blockScroll, allowScroll] = useScrollBlock();
-
   const isSmallScreen = useMediaQuery("(max-width:500px)");
 
-  const handleCloseMap = () => {
-    setShowMap(false);
-  };
+  const navigate = useNavigate();
 
   return (
     <div
@@ -48,16 +42,8 @@ export default function Landing({
         height="auto"
         minHeight="150vh"
         width="auto"
-        //auto fit constraints
         flexGrow={1}
         sx={{
-          ".full-screen-map": {
-            position: "fixed",
-            top: 0,
-            left: 0,
-            maxWidth: "100vw",
-            maxHeight: "100vh",
-          },
           position: "relative",
           display: "flex",
           flexDirection: "column",
@@ -70,10 +56,10 @@ export default function Landing({
           variant="contained"
           onClick={() => setButtonPopup(true)}
           sx={{
-            alignSelf: "right",
-            right: 20,
-            bottom: 10,
+            alignSelf: "flex-end",
             position: "fixed",
+            bottom: 10,
+            right: 20,
             backgroundColor: "#F7AF9D",
             width: isSmallScreen ? "90px" : "60px",
             height: isSmallScreen ? "90px" : "60px",
@@ -85,12 +71,12 @@ export default function Landing({
         <IconButton
           size="medium"
           variant="contained"
-          onClick={() => {blockScroll(); setShowMap(true);}}
+          onClick={() => navigate("/map")}
           sx={{
-            alignSelf: "right",
-            right: 20,
-            bottom: 80,
+            alignSelf: "flex-end",
             position: "fixed",
+            bottom: 80,
+            right: 20,
             backgroundColor: "#F7AF9D",
             width: isSmallScreen ? "90px" : "60px",
             height: isSmallScreen ? "90px" : "60px",
@@ -103,10 +89,10 @@ export default function Landing({
           size="medium"
           variant="contained"
           sx={{
-            alignSelf: "right",
-            right: 20,
-            bottom: 150,
+            alignSelf: "flex-end",
             position: "fixed",
+            bottom: 150,
+            right: 20,
             backgroundColor: "#F7AF9D",
             width: isSmallScreen ? "90px" : "60px",
             height: isSmallScreen ? "90px" : "60px",
@@ -114,6 +100,9 @@ export default function Landing({
         >
           <AccountIcon />
         </IconButton>
+
+        <Header />
+
         <Stack
           spacing={2}
           direction="column"
@@ -126,10 +115,6 @@ export default function Landing({
             alignItems: "center",
           }}
         >
-          <Typography variant="h2" color="text.secondary" fontWeight="normal">
-            SlugEvents
-          </Typography>
-
           <Stack direction="row" spacing={2}>
             <Filters
               resetFilter={resetFilter}
@@ -158,27 +143,10 @@ export default function Landing({
             ))}
           </Stack>
         </Stack>
+
         <Popups trigger={buttonPopup}>
-          <CreateEvent onClose={handlePopupClose}> </CreateEvent>
+          <CreateEvent onClose={handlePopupClose} />
         </Popups>
-        {showMap && ( 
-          <>
-            <MapContainer handleCloseMap={handleCloseMap} />
-            <IconButton
-              size="medium"
-              variant="contained"
-              onClick={handleCloseMap}
-              sx={{
-                position: "fixed",
-                top: 10,
-                right: 65,
-                color: "black",
-              }}
-            >
-              <CloseIcon />
-            </IconButton>
-          </>
-        )}
       </Box>
     </div>
   );
