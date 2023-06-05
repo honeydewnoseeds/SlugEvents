@@ -12,6 +12,14 @@ cd client
 npm start
 ```
 
+You may need to install the following libraries:
+```
+pip install datetime
+pip install instaloader
+pip instsall firebase
+pip install openai
+```
+
 ## Inspiration
 
 Have you ever seen a flyer for a super cool event on campus only to realize it was yesterday? Slug Events aims to increase campus participation overall.
