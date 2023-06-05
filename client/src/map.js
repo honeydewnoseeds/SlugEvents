@@ -156,7 +156,7 @@ class MapContainer extends Component {
             key={index}
             google={this.props.google}
             map={this.props.map}
-            eventName={marker.account}
+            accountName={marker.account}
             locationName={marker.eventLocation}
             time={marker.eventStartTime}
           />

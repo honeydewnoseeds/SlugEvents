@@ -2,24 +2,30 @@ import {useEffect} from 'react';
 
 // Gets College Name given account name
 const getCollegeName = (accountName) => {
-  switch (accountName) {
-    case 'ucsc9_jrl':
-      return 'College 9/John R. Lewis';
-    case 'stevenson.ucsc':
-    case 'cowell.ucsc':
-      return 'Cowell/Stevenson';
-    case 'porter.college':
-    case 'kc_ucsc':
-      return 'Porter/Kresge';
-    case 'rcc_ucsc':
-    case 'oakescollege':
-      return 'Rachel Carson/Oakes';
-    case 'ucsccrowncollege':
-    case 'ucscmerillcollege':
-      return 'Crown/Merill';
-    default:
-      return 'Campus Event';
+  if (accountName === "ucsc9_jrl") {
+    return "College 9/John R. Lewis";
+  } else if (
+    accountName === "stevenson.ucsc" ||
+    accountName === "cowell.ucsc"
+  ) {
+    return "Cowell/Stevenson";
+  } else if (
+    accountName === "porter.college" ||
+    accountName === "kc_ucsc"
+  ) {
+    return "Porter/Kresge";
+  } else if (
+    accountName === "rcc_ucsc" ||
+    accountName === "oakescollege"
+  ) {
+    return "Rachel Carson/Oakes";
+  } else if (
+    accountName === "ucsccrowncollege" ||
+    accountName === "ucscmerillcollege"
+  ) {
+    return "Crown/Merill";
   }
+  return "Campus Event";
 };
 
 const CustomMarker = ({google, map, accountName, locationName, time }) => {
@@ -47,7 +53,7 @@ const CustomMarker = ({google, map, accountName, locationName, time }) => {
           title: getCollegeName(accountName),
         });
 
-        const collegeName = getCollegeName(accountName);
+        var collegeName = getCollegeName(accountName);
 
         // InfoWindow associated with the Marker
         const infoWindow = new google.maps.InfoWindow({
