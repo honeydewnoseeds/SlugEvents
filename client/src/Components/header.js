@@ -4,6 +4,7 @@ import Typography from "@mui/material/Typography";
 import Toolbar from "@mui/material/Toolbar";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
+// creating a special fonts for the header
 const font = createTheme({
   typography: {
     fontFamily: ["Mogra", "cursive"].join(","),
