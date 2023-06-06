@@ -43,7 +43,10 @@ const Event = (props) => {
         backgroundColor: color(props.account),
         borderRadius: "16px",
       }}
-      onClick={() => navigate("/info")}
+      onClick={() => navigate("/info",{state: {
+        imageSrc: props.imageSrc,
+        description: props.description,
+      }})}
     >
       <img
         src={props.imageSrc}
