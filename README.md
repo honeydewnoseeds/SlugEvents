@@ -20,6 +20,17 @@ pip install instaloader
 pip instsall firebase
 pip install openai
 ```
+## Unit Tests/Automated Tests
+
+Tests are located in the following directory
+```
+client/src/Components/__tests__
+```
+
+To run the tests run
+```
+npm run test
+```
 
 ## Inspiration
 
