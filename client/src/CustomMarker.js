@@ -1,18 +1,11 @@
 import {useEffect} from 'react';
-import { useNavigate } from "react-router-dom";
 
 ////
 // Function which exports a Marker given a, Event Name, Location Name and Time
 // Uses google and map from map.js so they don't have to be imported into this file
 ////
-const CustomMarker = ({google, map, eventName, locationName, time, description, imageSrc}) => {
-  const navigate = useNavigate();
-  const goToInfo = () => {
-    navigate("/info",{state: {
-      imageSrc: imageSrc,
-      description: description,
-    }})
-  };
+
+const CustomMarker = ({google, map, eventName, locationName, time}) => {
 
   useEffect(() => {
     // Geocoder imported from the google maps api
@@ -36,26 +29,22 @@ const CustomMarker = ({google, map, eventName, locationName, time, description, 
           },
           title: eventName,
         });
-
         // InfoWindow associated with the Marker
         const infoWindow = new google.maps.InfoWindow({
           content: 
           `<div>
           <h1>Event: ${eventName}</h1>
           <h3>Location: ${locationName}</h3>
-          <p>Time: ${time} <a href="#" id="info">click here for more info</a></p>
+          <p>Time: ${time}</p>
           </div>`,
         });
-
-        document.getElementById("info").onclick = goToInfo();
         // InfoWindow opened when Marker is clicked
         marker.addListener('click', () => {
           infoWindow.open(map, marker);
         });
-        
       }
     });
-  }, [google, map, eventName, locationName, time, description, imageSrc]);
+  }, [google, map, eventName, locationName, time]);
 
   return null;
 };
