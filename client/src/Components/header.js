@@ -3,7 +3,6 @@ import AppBar from "@mui/material/AppBar";
 import Typography from "@mui/material/Typography";
 import Toolbar from "@mui/material/Toolbar";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import {themeOptions } from "./theme";
 
 const font = createTheme({
   typography: {

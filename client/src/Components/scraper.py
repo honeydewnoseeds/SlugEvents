@@ -1,11 +1,12 @@
 import os
-import instaloader
 from datetime import datetime, timedelta
+import instaloader
 import openai
 from firebase_admin import credentials, initialize_app, storage, firestore
 
 # Initialize Firebase Admin SDK
-cred = credentials.Certificate("slugevents-57e0b-firebase-adminsdk-brd1a-dcc2a15087.json")
+cred = credentials.Certificate(
+    "slugevents-57e0b-firebase-adminsdk-brd1a-dcc2a15087.json")
 initialize_app(cred, {
     "storageBucket": "slugevents-57e0b.appspot.com"
 })
@@ -73,7 +74,8 @@ for profile_name in profiles:
 
         # Extract location, date, and time from the response
         location, date, time = None, None, None  # Initialize variables
-        message_parts = response['choices'][0]['message']['content'].split(', ')
+        message_parts = response['choices'][0]['message']['content'].split(
+            ', ')
         for part in message_parts:
             if 'location:' in part.lower():
                 location = part.split(': ')[1]
@@ -84,8 +86,10 @@ for profile_name in profiles:
 
         # Check if the post is a sidecar (album)
         if post.typename == "GraphSidecar":
-            sidecar_nodes = list(post.get_sidecar_nodes())  # Convert generator to list
-            url = sidecar_nodes[0].display_url  # Get the URL of the first image
+            # Convert generator to list
+            sidecar_nodes = list(post.get_sidecar_nodes())
+            # Get the URL of the first image
+            url = sidecar_nodes[0].display_url
         else:
             url = post.url
 

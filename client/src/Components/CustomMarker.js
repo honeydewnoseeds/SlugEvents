@@ -1,46 +1,40 @@
-import {useEffect} from 'react';
+import { useEffect } from "react";
 
 // Gets College Name given account name
 const getCollegeName = (accountName) => {
-  if (accountName === "ucsc9_jrl") {
-    return "College 9/John R. Lewis";
-  } else if (
-    accountName === "stevenson.ucsc" ||
-    accountName === "cowell.ucsc"
-  ) {
-    return "Cowell/Stevenson";
-  } else if (
-    accountName === "porter.college" ||
-    accountName === "kc_ucsc"
-  ) {
-    return "Porter/Kresge";
-  } else if (
-    accountName === "rcc_ucsc" ||
-    accountName === "oakescollege"
-  ) {
-    return "Rachel Carson/Oakes";
-  } else if (
-    accountName === "ucsccrowncollege" ||
-    accountName === "ucscmerillcollege"
-  ) {
-    return "Crown/Merill";
+  switch (accountName) {
+    case "ucsc9_jrl":
+      return "College 9/John R. Lewis";
+    case "stevenson.ucsc":
+    case "cowell.ucsc":
+      return "Cowell/Stevenson";
+    case "porter.college":
+    case "kc_ucsc":
+      return "Porter/Kresge";
+    case "rcc_ucsc":
+    case "oakescollege":
+      return "Rachel Carson/Oakes";
+    case "ucsccrowncollege":
+    case "ucscmerillcollege":
+      return "Crown/Merill";
+    default:
+      return "Campus Event";
   }
-  return "Campus Event";
 };
 
-const CustomMarker = ({google, map, accountName, locationName, time }) => {
+const CustomMarker = ({ google, map, accountName, locationName, time }) => {
   useEffect(() => {
     // Geocoder imported from the google maps api
     const geocoder = new google.maps.Geocoder();
-    
+
     // Random offset generated for when same locations are used
     const offset = Math.random() * 0.0001;
 
     // Uses the Location name in prder to get lat, lng for marker
-    geocoder.geocode({address: locationName}, (results, status) => {
-      if (status === 'OK' && results && results.length > 0) {
-        const {geometry} = results[0];
-        const {location} = geometry;
+    geocoder.geocode({ address: locationName }, (results, status) => {
+      if (status === "OK" && results && results.length > 0) {
+        const { geometry } = results[0];
+        const { location } = geometry;
 
         // Sets location for Marker as well as Title
         const marker = new google.maps.Marker({
@@ -53,7 +47,7 @@ const CustomMarker = ({google, map, accountName, locationName, time }) => {
           title: getCollegeName(accountName),
         });
 
-        var collegeName = getCollegeName(accountName);
+        const collegeName = getCollegeName(accountName);
 
         // InfoWindow associated with the Marker
         const infoWindow = new google.maps.InfoWindow({
@@ -67,7 +61,7 @@ const CustomMarker = ({google, map, accountName, locationName, time }) => {
         });
 
         // InfoWindow opened when Marker is clicked
-        marker.addListener('click', () => {
+        marker.addListener("click", () => {
           infoWindow.open(map, marker);
         });
       }
