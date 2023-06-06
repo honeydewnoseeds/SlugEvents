@@ -1,4 +1,21 @@
 import React, { Component } from 'react'
+import { Grid,Paper, Avatar, TextField, Button, Typography,Link } from '@material-ui/core'
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import Header from "./header";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+const paperStyle={padding :20,height:'70vh',width:280, margin:"20px auto"}
+const avatarStyle={backgroundColor:'#1bbd7e'}
+const btnstyle={margin:'8px 0'}
+const backStyle = {
+    display: 'flex center',
+    backgroundColor: '#f7e3af',
+    height: '100vh', // Adjust the height as needed
+    align: 'center'
+  };
 
 export default class SignUp extends Component {
     constructor(props) {
@@ -33,61 +50,57 @@ export default class SignUp extends Component {
         .then((res) => res.json())
         .then((data) => {
             console.log(data,"userRegister");
+            if (data.status == "ok") {
+                window.location.href = "http://localhost:3000/login";
+                
+              }
+              else {
+                console.log("Did not verify");
+              }
         });
     }
   render() {
     return (
-      <form onSubmit= {this.handleSubmit}>
-        <h3>Sign Up</h3>
+      <div style={backStyle}> 
+      <Header/>
+      <Grid>
+      <Paper elevation={10} style={paperStyle}>
+        <Grid align='center'>
+          <h3>Create an Account</h3>
+        </Grid>
+        <br/><br/>
+        <form onSubmit= {this.handleSubmit}>
+            <TextField
 
-        <div className="mb-3">
-          <label>First name</label>
-          <input
-            type="text"
-            className="form-control"
-            placeholder="First name"
-            onChange={(e) => this.setState({fname: e.target.value })}
-          />
-        </div>
-
-        <div className="mb-3">
-          <label>Last name</label>
-          <input type="text" className="form-control" 
-          placeholder="Last name" 
-          onChange={(e) => this.setState({lname: e.target.value })}
-          />
-          
-        </div>
-
-        <div className="mb-3">
-          <label>Email address</label>
-          <input
-            type="email"
-            className="form-control"
-            placeholder="Enter email"
-            onChange={(e) => this.setState({email: e.target.value })}
-          />
-        </div>
-
-        <div className="mb-3">
-          <label>Password</label>
-          <input
-            type="password"
-            className="form-control"
-            placeholder="Enter password"
-            onChange={(e) => this.setState({password: e.target.value })}
-          />
-        </div>
-
-        <div className="d-grid">
-          <button type="submit" className="btn btn-primary">
-            Sign Up
-          </button>
-        </div>
-        <p className="forgot-password text-right">
-          Already registered <a href="/login">sign in?</a>
-        </p>
-      </form>
+                placeholder='First Name'
+                type="First Name" fullWidth required
+                className="form-control"
+                onChange={(e) => this.setState({fname: e.target.value })}/>
+              <TextField 
+                  placeholder='Last Name'
+                  type="Last Name" fullWidth required
+                  className="form-control"
+                  onChange={(e) => this.setState({lname: e.target.value })}/>
+              <TextField 
+                  placeholder='email'
+                  type="Email" fullWidth required
+                  className="form-control"
+                  onChange={(e) => this.setState({email: e.target.value })}/>
+              <TextField 
+                  placeholder='password'
+                  type="password" fullWidth required
+                  className="form-control"
+                  onChange={(e) => this.setState({password: e.target.value })}/>
+              <Button type='submit' color='primary' variant="contained" style={btnstyle} fullWidth>Sign up</Button>
+              <Typography > Already have an account ?
+                            <Link href="./Login" >
+                                Sign in 
+                        </Link>
+                        </Typography>
+          </form>
+      </Paper>
+      </Grid>
+      </div>
     )
   }
 }

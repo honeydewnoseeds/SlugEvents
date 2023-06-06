@@ -90,7 +90,7 @@ export default function Landing({
         <IconButton
           size="medium"
           variant="contained"
-          onClick={() => navigate("/login")}
+          onClick={() => navigate("/userDetails")}
           sx={{
             alignSelf: "flex-end",
             position: "fixed",

@@ -10,11 +10,15 @@ import SignUpPage from "./pages/SignUpPage";
 import SignUp from "./Components/SignUp";
 import Login from "./Components/Login";
 import UserDetails from "./Components/userDetails";
+import Reset from "./Components/reset";
 import { ThemeProvider } from "@mui/material";
 import { themeOptions } from "./Components/theme";
 import { doc, writeBatch } from "firebase/firestore";
 import { onSnapshot } from "firebase/firestore";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
+
+// Condition to determine whether to skip Firestore calls
+const skipFirestore = true; // Set this to true to skip Firestore calls
 
 function App() {
 
@@ -27,15 +31,18 @@ function App() {
   const eventsCollectionRef = collection(db, "events");
 
   useEffect(() => {
-    const unsubscribe = onSnapshot(eventsCollectionRef, (snapshot) => {
-      const updatedData = snapshot.docs.map((doc) => ({...doc.data(), id: doc.id, }));
-      setEventList(updatedData);
-    });
+    if (!skipFirestore) {
+      const unsubscribe = onSnapshot(eventsCollectionRef, (snapshot) => {
+        const updatedData = snapshot.docs.map((doc) => ({...doc.data(), id: doc.id, }));
+        setEventList(updatedData);
+      });
+    
   
-    // Clean up the listener when the component unmounts
-    return () => {
-      unsubscribe();
-    };
+      // Clean up the listener when the component unmounts
+      return () => {
+        unsubscribe();
+      };
+    }
   }, []); // Add empty dependency array  
 
   // Define a function to filter events by the "account" field
@@ -91,38 +98,43 @@ function App() {
   }, []);
 
   //Add an event using the format addEvent({account: "Porter/Kresge", description: "Lorem ipsum", imageSrc: "https://source.unsplash.com/random"})
-  const addEvent = async (
-    event = {
-      account: "Porter/Kresge",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      imageSrc: "https://source.unsplash.com/random",
-    }
-  ) => {
-    try {
-      const docRef = await addDoc(eventsCollectionRef, event);
-      console.log("Event added with ID:", docRef.id);
-    } catch (err) {
-      console.error("Error adding event:", err);
-    }
-  };
-  window.addEvent = addEvent;
+  if (!skipFirestore) {
+    const addEvent = async (
+      event = {
+        account: "Porter/Kresge",
+        description:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+        imageSrc: "https://source.unsplash.com/random",
+      }
+    ) => {
+      try {
+        const docRef = await addDoc(eventsCollectionRef, event);
+        console.log("Event added with ID:", docRef.id);
+      } catch (err) {
+        console.error("Error adding event:", err);
+      }
+    };
+    window.addEvent = addEvent;
+}
 
   //Clears all events from database
+  if (!skipFirestore) {
   const clearEvents = async () => {
-    try {
-      const data = await getDocs(eventsCollectionRef);
-      const batch = writeBatch(db);
-      data.docs.forEach((docSnapshot) => {
-        batch.delete(doc(eventsCollectionRef, docSnapshot.id));
-      });
-      await batch.commit();
-      console.log("All events deleted");
-    } catch (err) {
-      console.error("Error deleting events:", err);
-    }
+
+      try {
+        const data = await getDocs(eventsCollectionRef);
+        const batch = writeBatch(db);
+        data.docs.forEach((docSnapshot) => {
+          batch.delete(doc(eventsCollectionRef, docSnapshot.id));
+        });
+        await batch.commit();
+        console.log("All events deleted");
+      } catch (err) {
+        console.error("Error deleting events:", err);
+      }
   };
   window.clearEvents = clearEvents;
+}
 
   return (
     <ThemeProvider theme={themeOptions}>
@@ -158,10 +170,10 @@ function App() {
           />
           <Route path="/info" element={<Info />} />
           <Route path="/map" element={<Map />} />
-          {/* <Route path="/signuppage" element={<SignUpPage />} /> */}
-          <Route path="/signup" element={ isLoggedIn == "true" ? <UserDetails /> : <SignUp/>}/>
-          <Route path="/login" element={<Login />} />
-          <Route path="/userdetails" element={<UserDetails />} />
+          <Route path="/signup" element={<SignUp/>}/>
+          <Route path="/login" element={isLoggedIn == "true"? <Landing /> : <Login />} />
+          <Route path="/userdetails" element={isLoggedIn == "true"? <UserDetails /> : <Login />} />
+          <Route path="/reset" element={<Reset />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
