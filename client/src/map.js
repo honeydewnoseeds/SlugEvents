@@ -156,6 +156,8 @@ class MapContainer extends Component {
             eventName={marker.account}
             locationName={marker.eventLocation}
             time={marker.eventStartTime}
+            description={marker.description}
+            imageSrc={marker.imageSrc}
           />
         ))}
       </Map>
